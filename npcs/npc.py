@@ -1,60 +1,67 @@
+import random
+from name_dict import *
+
 class Npc():
-    def __init__(self, first_name, last_name, npc_race, npc_class):
-        self.first_name = F_NAMES_DICT[first_name]
-        self.last_name = L_NAMES_DICT[last_name]
-        self.name = self.first_name + " " + self.last_name
-        self.npc_race = NPC_RACE_DICT[npc_race]
-        self.npc_class = NPC_CLASS_DICT[npc_class]
-        self.special_info = ""
-        self.__special_race_info()
-
-    def __special_race_info(self):
-        pass
-
+    def __init__(self):
+        self.first_name = random.choice(list(F_NAMES_DICT.values()))
+        self.last_name = random.choice(list(L_NAMES_DICT.values()))
+        self.name = f"{self.first_name} {self.last_name}"
+        self.npc_class = random.choice(list(NPC_CLASS_DICT.values()))
+        chosen_race = random.choice(list(NPC_RACE_DICT.values()))
+        self.npc_race_name = chosen_race[0]
+        self.npc_race_instance = chosen_race[1]
+        self.special_info = self.npc_race_instance.class_race_info()
 
 class Races():
-    def class_race_info():
-        print("Generic class race information")
+    def class_race_info(self):
+        return "Generic class race information"
 
 class Dwarf(Races):
-    def class_race_info():
-        return "Dwarves are a hearty breed"
+    def class_race_info(self):
+        return "Stout, skilled in craft and combat, with a strong sense of kinship and tradition."
 
 class Elf(Races):
-    def class_race_info():
-        return "Elfs are agile creatures"
+    def class_race_info(self):
+        return "Ancient, magical, and graceful, with a deep bond to nature and art."
 
 class Halfling(Races):
-    pass
+    def class_race_info(self):
+        return "Cheerful and resourceful small folk who cherish community and comfort."
 
 class Human(Races):
-    pass
+    def class_race_info(self):
+        return "Remarkably diverse and ambitious, thriving on innovation and exploration."
 
 class Dragonborn(Races):
-    pass
+    def class_race_info(self):
+        return "Proud, dragon-blooded warriors with a natural command of power and respect."
 
 class Gnome(Races):
-    pass
+    def class_race_info(self):
+        return "Inventive and curious, blending mischief with a keen intellect."
 
-class Half_Elf(Races):
-    pass
+class Half_elf(Races):
+    def class_race_info(self):
+        return "Versatile and charismatic, bridging the gap between human and elven worlds."
 
-class Half_Orc(Races):
-    pass
+class Half_orc(Races):
+    def class_race_info(self):
+        return "Strong and tenacious, often battling against prejudice with fierce loyalty."
 
 class Tiefling(Races):
-    pass
+    def class_race_info(self):
+        return "Mystical and misunderstood, bearing the mark of their infernal heritage with defiance."
 
 NPC_RACE_DICT = {
-    1: "Dwarf",
-    2: "Elf",
-    3: "Halfling",
-    4: "Human",
-    5: "Dragonborn",
-    6: "Gnome",
-    7: "Half Elf",
-    8: "Half Orc",
-    9: "Tiefling"
+    1: ["Dwarf", Dwarf()],
+    2: ["Elf", Elf()],
+    3: ["Halfling", Halfling()],
+    4: ["Human", Human()],
+    5: ["Dragonborn", Dragonborn()],
+    6: ["Gnome", Gnome()],
+    7: ["Half Elf", Half_elf()],
+    8: ["Half Orc", Half_orc()],
+    9: ["Tiefling", Tiefling()]
 }
 
 NPC_CLASS_DICT = {
@@ -70,22 +77,4 @@ NPC_CLASS_DICT = {
     10: "Sorcerer",
     11: "Warlock",
     12: "Wizard"
-}
-
-F_NAMES_DICT = {
-    1: "Cheal",
-    2: "Elkin",
-    3: "Goff",
-    4: "Knepel",
-    5: "Adair",
-    6: "Vander"
-}
-
-L_NAMES_DICT = {
-    1: "Esha",
-    2: "Fazal",
-    3: "Goggin",
-    4: "Golin",
-    5: "Vanderthrump",
-    6: "Wind"
 }
