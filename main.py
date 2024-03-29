@@ -2,14 +2,14 @@ import random
 from npcs.npc import *
 
 npc_dict = {
-    "npc": {}
+    "npc": {
+    }
 }
 
 def create_npcs(number):
-    count = 0
+    total_npcs = 0
 
-    while count < number:
-        count += 1
+    while total_npcs < number:
         npc_first_name = random.randint(1, len(F_NAMES_DICT))
         npc_last_name = random.randint(1, len(L_NAMES_DICT))
         npc_race = random.randint(1, len(NPC_RACE_DICT))
@@ -19,16 +19,17 @@ def create_npcs(number):
         if npc.name in npc_dict["npc"]:
             print(f"SKIPPING {npc.name} ALREADY EXISTS!")
         else:
+            total_npcs += 1
             npc_dict["npc"][npc.name] = {
                 "race": npc.npc_race,
-                "class": npc.npc_class
+                "class": npc.npc_class,
+                "special_race_info": npc.special_info
             }
 
 def main():
-    number = int(input("How many NPCS: "))
-    create_npcs(number)
+    # number = int(input("How many NPCS: "))
+    create_npcs(5)
     print(npc_dict)
-    
 
 if __name__ == '__main__':
     main()

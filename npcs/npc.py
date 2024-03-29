@@ -5,6 +5,12 @@ class Npc():
         self.name = self.first_name + " " + self.last_name
         self.npc_race = NPC_RACE_DICT[npc_race]
         self.npc_class = NPC_CLASS_DICT[npc_class]
+        self.special_info = ""
+        self.__special_race_info()
+
+    def __special_race_info(self):
+        pass
+
 
 class Races():
     def class_race_info():
@@ -12,11 +18,11 @@ class Races():
 
 class Dwarf(Races):
     def class_race_info():
-        print("Dwarfs are hearty characters")
+        return "Dwarves are a hearty breed"
 
 class Elf(Races):
     def class_race_info():
-        print("Elfs are agile creatures")
+        return "Elfs are agile creatures"
 
 class Halfling(Races):
     pass
