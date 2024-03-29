@@ -1,3 +1,44 @@
+class Npc():
+    def __init__(self, first_name, last_name, npc_race, npc_class):
+        self.first_name = F_NAMES_DICT[first_name]
+        self.last_name = L_NAMES_DICT[last_name]
+        self.name = self.first_name + " " + self.last_name
+        self.npc_race = NPC_RACE_DICT[npc_race]
+        self.npc_class = NPC_CLASS_DICT[npc_class]
+
+class Races():
+    def class_race_info():
+        print("Generic class race information")
+
+class Dwarf(Races):
+    def class_race_info():
+        print("Dwarfs are hearty characters")
+
+class Elf(Races):
+    def class_race_info():
+        print("Elfs are agile creatures")
+
+class Halfling(Races):
+    pass
+
+class Human(Races):
+    pass
+
+class Dragonborn(Races):
+    pass
+
+class Gnome(Races):
+    pass
+
+class Half_Elf(Races):
+    pass
+
+class Half_Orc(Races):
+    pass
+
+class Tiefling(Races):
+    pass
+
 NPC_RACE_DICT = {
     1: "Dwarf",
     2: "Elf",
@@ -42,47 +83,3 @@ L_NAMES_DICT = {
     5: "Vanderthrump",
     6: "Wind"
 }
-
-class Npc():
-    def __init__(self, first_name, last_name, npc_race, npc_class):
-        self.first_name = F_NAMES_DICT[first_name]
-        self.last_name = L_NAMES_DICT[last_name]
-        self.name = self.first_name + " " + self.last_name
-        self.npc_race = NPC_RACE_DICT[npc_race]
-        self.npc_class = NPC_CLASS_DICT[npc_class]
-    
-    def get_npc_info(self):
-        print(f"NAME: {self.name}, RACE: {self.npc_race}, CLASS: {self.npc_class}")
-
-class Races():
-    def class_race_info():
-        print("Generic class race information")
-
-class Dwarf(Races):
-    def class_race_info():
-        print("Dwarfs are hearty characters")
-
-class Elf(Races):
-    def class_race_info():
-        print("Elfs are agile creatures")
-
-class Halfling(Races):
-    pass
-
-class Human(Races):
-    pass
-
-class Dragonborn(Races):
-    pass
-
-class Gnome(Races):
-    pass
-
-class Half_Elf(Races):
-    pass
-
-class Half_Orc(Races):
-    pass
-
-class Tiefling(Races):
-    pass
