@@ -53,3 +53,36 @@ class Npc():
     
     def get_npc_info(self):
         print(f"NAME: {self.name}, RACE: {self.npc_race}, CLASS: {self.npc_class}")
+
+class Races():
+    def class_race_info():
+        print("Generic class race information")
+
+class Dwarf(Races):
+    def class_race_info():
+        print("Dwarfs are hearty characters")
+
+class Elf(Races):
+    def class_race_info():
+        print("Elfs are agile creatures")
+
+class Halfling(Races):
+    pass
+
+class Human(Races):
+    pass
+
+class Dragonborn(Races):
+    pass
+
+class Gnome(Races):
+    pass
+
+class Half_Elf(Races):
+    pass
+
+class Half_Orc(Races):
+    pass
+
+class Tiefling(Races):
+    pass

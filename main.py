@@ -20,7 +20,7 @@ def create_muli_npc(number):
 
 def main():
     number = int(input("How many NPCS: "))
-    create_muli_npc(number)
+    x = create_muli_npc(number)
     
 
 if __name__ == '__main__':
