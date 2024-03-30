@@ -1,25 +1,5 @@
-from fastapi import FastAPI, Query
 import time
 from npcs.npc import *
-
-app = FastAPI()
-name = "Haley"
-number = 5
-
-@app.get("/")
-async def root():
-    return {"message": f"Hello {name}"}
-
-@app.get("/npcs")
-async def get_npcs(number: int = Query(number, title="Number of NPCs", description="The number of NPCs to generate.")):
-    start_time = time.time()
-
-    create_npcs(number)
-    print_npc_details()
-
-    end_time = time.time()
-    print(f"TIME: {end_time - start_time} seconds")
-    return {"npcs": npc_dict}
 
 npc_dict = {
     "npc": {
@@ -56,3 +36,17 @@ def print_npc_details():
         for stat, value in details['stat_block'].items():
             print(f"{stat}: {value}")
         print("\n")
+
+def main():
+    start_time = time.time()
+
+    create_npcs(25)
+    # print(npc_dict)
+
+    print_npc_details()
+
+    end_time = time.time()
+    print(f"TIME: {end_time - start_time} seconds")
+
+if __name__ == '__main__':
+    main()
