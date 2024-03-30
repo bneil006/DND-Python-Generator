@@ -1,5 +1,6 @@
 import random
 from name_dict import *
+from equipment import *
 
 class Npc():
     def __init__(self):
@@ -12,6 +13,7 @@ class Npc():
         self.npc_race_instance = chosen_race[1]
         self.special_info = self.npc_race_instance.class_race_info()
         self.stat_block = self.npc_race_instance.base_stat_modifiers()
+        self.starting_pack = random.choice(list(STARTING_EQUIPMENT_PACKS.items()))
 
 class Races():
     def __init__(self):
@@ -78,6 +80,12 @@ class Elf(Races):
     def base_stat_modifiers(self):
         modified_stats = self.BASE_STATS.copy()
         modified_stats["DEX"] += 2
+        if self.subrace == "High Elf":
+            modified_stats["INT"] += 1
+        elif self.subrace == "Wood Elf":
+            modified_stats["WIS"] += 1
+        else:
+            modified_stats["CHA"] += 1
         return modified_stats
 
 class Halfling(Races):
@@ -96,6 +104,10 @@ class Halfling(Races):
     def base_stat_modifiers(self):
         modified_stats = self.BASE_STATS.copy()
         modified_stats["DEX"] += 2
+        if self.subrace == "Lightfoot Halfling":
+            modified_stats["CHA"] += 1
+        else:
+            modified_stats["CON"] += 1
         return modified_stats
 
 class Human(Races):
@@ -150,6 +162,10 @@ class Gnome(Races):
     def base_stat_modifiers(self):
         modified_stats = self.BASE_STATS.copy()
         modified_stats["INT"] += 2
+        if self.subrace == "Forest Gnome":
+            modified_stats["DEX"] += 1
+        else:
+            modified_stats["CON"] += 1
         return modified_stats
 
 class Half_elf(Races):
@@ -163,8 +179,16 @@ class Half_elf(Races):
         return "Versatile and charismatic, bridging the gap between human and elven worlds."
     
     def base_stat_modifiers(self):
+        additional_modified_stats = self.BASE_STATS.copy()
+        del additional_modified_stats["CHA"]
+
         modified_stats = self.BASE_STATS.copy()
         modified_stats["CHA"] += 2
+
+        for i in range(0, 2):
+            random_stat_selection = random.choice(list(additional_modified_stats))
+            modified_stats[random_stat_selection] += 1
+
         return modified_stats
 
 class Half_orc(Races):
