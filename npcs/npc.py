@@ -16,29 +16,62 @@ class Npc():
 class Races():
     def __init__(self):
         self.BASE_STATS = {
-                "STR": 0,
-                "DEX": 0,
-                "CON": 0,
-                "INT": 0,
-                "WIS": 0,
-                "CHA": 0
-            }
+            "STR": 0,
+            "DEX": 0,
+            "CON": 0,
+            "INT": 0,
+            "WIS": 0,
+            "CHA": 0
+        }
+        self.subrace_dict = {}
+        self.subrace = None
+
     def class_race_info(self):
         return "Generic class race information"
+    
+    def subrace_picker(self):
+        if self.subrace_dict:
+            self.subrace = random.choice(list(self.subrace_dict.values()))
+        else:
+            self.subrace = "None"
+        return self.subrace
     
     def base_stat_modifiers(self):
         return self.BASE_STATS
 
 class Dwarf(Races):
+    def __init__(self):
+        super().__init__()
+        self.subrace_dict = {
+            1: "Hill Dwarf",
+            2: "Mountain Dwarf"
+        }
+        self.subrace = self.subrace_picker()
+        self.base_stat_modifiers()
+
     def class_race_info(self):
         return "Stout, skilled in craft and combat, with a strong sense of kinship and tradition."
     
     def base_stat_modifiers(self):
         modified_stats = self.BASE_STATS.copy()
         modified_stats["CON"] += 2
+        if self.subrace == "Hill Dwarf":
+            modified_stats["WIS"] += 1
+        else:
+            modified_stats["STR"] += 2
         return modified_stats
 
 class Elf(Races):
+    def __init__(self):
+        super().__init__()
+        self.subrace_dict = {
+            1: "High Elf",
+            2: "Wood Elf",
+            3: "Dark Elf"
+        }
+        self.subrace = self.subrace_picker()
+        self.base_stat_modifiers()
+
     def class_race_info(self):
         return "Ancient, magical, and graceful, with a deep bond to nature and art."
     
@@ -48,6 +81,15 @@ class Elf(Races):
         return modified_stats
 
 class Halfling(Races):
+    def __init__(self):
+        super().__init__()
+        self.subrace_dict = {
+            1: "Lightfoot Halfling",
+            2: "Stout Halfling"
+        }
+        self.subrace = self.subrace_picker()
+        self.base_stat_modifiers()
+
     def class_race_info(self):
         return "Cheerful and resourceful small folk who cherish community and comfort."
     
@@ -57,6 +99,12 @@ class Halfling(Races):
         return modified_stats
 
 class Human(Races):
+    def __init__(self):
+        super().__init__()
+        self.subrace = None
+        self.subrace = self.subrace_picker()
+        self.base_stat_modifiers()
+
     def class_race_info(self):
         return "Remarkably diverse and ambitious, thriving on innovation and exploration."
     
@@ -71,6 +119,12 @@ class Human(Races):
         return modified_stats
 
 class Dragonborn(Races):
+    def __init__(self):
+        super().__init__()
+        self.subrace = None
+        self.subrace = self.subrace_picker()
+        self.base_stat_modifiers()
+
     def class_race_info(self):
         return "Proud, dragon-blooded warriors with a natural command of power and respect."
     
@@ -81,6 +135,15 @@ class Dragonborn(Races):
         return modified_stats
 
 class Gnome(Races):
+    def __init__(self):
+        super().__init__()
+        self.subrace_dict = {
+            1: "Forest Gnome",
+            2: "Rock Gnome"
+        }
+        self.subrace = self.subrace_picker()
+        self.base_stat_modifiers()
+
     def class_race_info(self):
         return "Inventive and curious, blending mischief with a keen intellect."
     
@@ -90,6 +153,12 @@ class Gnome(Races):
         return modified_stats
 
 class Half_elf(Races):
+    def __init__(self):
+        super().__init__()
+        self.subrace = None
+        self.subrace = self.subrace_picker()
+        self.base_stat_modifiers()
+
     def class_race_info(self):
         return "Versatile and charismatic, bridging the gap between human and elven worlds."
     
@@ -99,6 +168,12 @@ class Half_elf(Races):
         return modified_stats
 
 class Half_orc(Races):
+    def __init__(self):
+        super().__init__()
+        self.subrace = None
+        self.subrace = self.subrace_picker()
+        self.base_stat_modifiers()
+
     def class_race_info(self):
         return "Strong and tenacious, often battling against prejudice with fierce loyalty."
     
@@ -109,6 +184,12 @@ class Half_orc(Races):
         return modified_stats
 
 class Tiefling(Races):
+    def __init__(self):
+        super().__init__()
+        self.subrace = None
+        self.subrace = self.subrace_picker()
+        self.base_stat_modifiers()
+
     def class_race_info(self):
         return "Mystical and misunderstood, bearing the mark of their infernal heritage with defiance."
     

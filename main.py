@@ -17,6 +17,7 @@ def create_npcs(number):
             total_npcs += 1
             npc_dict["npc"][npc.name] = {
                 "race": npc.npc_race_name,
+                "subrace": npc.npc_race_instance.subrace,
                 "class": npc.npc_class,
                 "special_race_info": npc.special_info,
                 "stat_block": npc.stat_block
@@ -25,7 +26,7 @@ def create_npcs(number):
 def main():
     start_time = time.time()
 
-    create_npcs(15)
+    create_npcs(5)
     print(npc_dict)
 
     end_time = time.time()
