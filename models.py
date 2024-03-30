@@ -1,6 +1,5 @@
-from fastapi import FastAPI
 from pydantic import BaseModel
-from npcs.npc import *
+from important_classes.npc import *
 from typing import Dict, List, Union
 
 class Npc_item(BaseModel):

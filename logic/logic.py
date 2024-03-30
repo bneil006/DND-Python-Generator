@@ -1,5 +1,5 @@
 import time
-from npcs.npc import *
+from important_classes.npc import *
 
 npc_dict = {
     "npc": {

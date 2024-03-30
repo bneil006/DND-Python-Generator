@@ -1,23 +1,25 @@
 import random
-from name_dict import *
-from equipment import *
+from important_classes.equipment import *
+from important_classes.name_generator import *
+
+def choose_random_item(dictionary):
+    return random.choice(list(dictionary.values()))
 
 class Npc():
     _id_counter = 0
 
     def __init__(self):
-        Npc._id_counter +=1
+        Npc._id_counter += 1
         self.id = Npc._id_counter
-        self.first_name = random.choice(list(F_NAMES_DICT.values()))
-        self.last_name = random.choice(list(L_NAMES_DICT.values()))
+        self.first_name = generate_name(first_name_elements)
+        self.last_name = generate_name(last_name_elements)
         self.name = f"{self.first_name} {self.last_name}"
-        self.npc_class = random.choice(list(NPC_CLASS_DICT.values()))
-        chosen_race = random.choice(list(NPC_RACE_DICT.values()))
-        self.npc_race_name = chosen_race[0]
-        self.npc_race_instance = chosen_race[1]
+        self.npc_class = choose_random_item(NPC_CLASS_DICT)
+        chosen_race = choose_random_item(NPC_RACE_DICT)
+        self.npc_race_name, self.npc_race_instance = chosen_race
         self.special_info = self.npc_race_instance.class_race_info()
         self.stat_block = self.npc_race_instance.base_stat_modifiers()
-        self.starting_pack = random.choice(list(STARTING_EQUIPMENT_PACKS.items()))
+        self.starting_pack = choose_random_item(STARTING_EQUIPMENT_PACKS)
 
 class Races():
     def __init__(self):
