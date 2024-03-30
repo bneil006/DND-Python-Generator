@@ -16,9 +16,9 @@ def create_npcs(number):
             total_npcs += 1
             persistant_npc_dict["npc"][npc.name] = {
                 "id": npc.id,
-                "race": npc.npc_race_name,
-                "subrace": npc.npc_race_instance.subrace,
-                "class": npc.npc_class,
+                "npc_race": npc.npc_race_name,
+                "npc_subrace": npc.npc_race_instance.subrace,
+                "npc_class": npc.npc_class,
                 "special_race_info": npc.special_info,
                 "stat_block": npc.stat_block,
                 "starting_pack": npc.starting_pack
