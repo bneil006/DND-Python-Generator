@@ -54,7 +54,7 @@ async def get_npcs(number: int = Query(default=5, le=500)):
     return {"npcs": persistant_npc_dict}
 
 @app.get("/npcs_generator_temp")
-async def get_npcs_temp(number: int = Query(default=5, le=500)):
+async def get_npcs_temp(number: int = Query(default=5, le=50000)):
     start = time.time()
 
     npc_dict_temp = create_npcs_temporary(number)
@@ -65,8 +65,8 @@ async def get_npcs_temp(number: int = Query(default=5, le=500)):
 
 @app.get("/npc_names")
 async def get_npc_names(number: int = Query(default=5000, le=50000)):
-    npc_na = npc_names(persistant_npc_dict)
-    return {"npc_names": npc_na}
+    npc_list = npc_names(persistant_npc_dict)
+    return {"npc_names": npc_list}
 
 @app.get("/clear_npcs")
 async def clear_npcs():

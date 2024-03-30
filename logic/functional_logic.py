@@ -53,9 +53,9 @@ def create_npcs_temporary(number):
 
     return npc_dict_temp
 
-def get_npc_names(npc_dict):
-    npc_name_list = []
-    for npc_name, npc_details in npc_dict["npc"].items():
-        npc_name_list.append(npc_details["name"])
-
-    return npc_name_list
+def npc_names(npc_dict):
+    names = []
+    for name in npc_dict["npc"]:
+        names.append(name)
+    
+    return names
