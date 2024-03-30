@@ -1,3 +1,4 @@
+import time
 from npcs.npc import *
 
 npc_dict = {
@@ -17,12 +18,18 @@ def create_npcs(number):
             npc_dict["npc"][npc.name] = {
                 "race": npc.npc_race_name,
                 "class": npc.npc_class,
-                "special_race_info": npc.special_info
+                "special_race_info": npc.special_info,
+                "stat_block": npc.stat_block
             }
 
 def main():
-    create_npcs(10)
+    start_time = time.time()
+
+    create_npcs(15)
     print(npc_dict)
+
+    end_time = time.time()
+    print(f"TIME: {end_time - start_time} seconds")
 
 if __name__ == '__main__':
     main()
