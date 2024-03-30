@@ -1,4 +1,5 @@
 from important_classes.npc import *
+from itertools import islice
 
 persistant_npc_dict = {"npc": {}}
 
@@ -59,8 +60,3 @@ def npc_names(npc_dict):
         names.append(name)
     
     return names
-
-def trim_dict_items(npc_dict):
-    while len(npc_dict) > 5:
-        next_iter = iter(npc_dict)
-        del npc_dict[next(next_iter)]

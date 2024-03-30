@@ -44,7 +44,7 @@ async def create_npc(npc_item: Npc_item):
 
     return {"message": "NPC has been added", "npc_item": npc_dict}
 
-@app.get("/npcs_generator_semi_persist")
+@app.get("/npc_generator")
 async def get_npcs(number: int = Query(default=5, le=500)):
     start = time.time()
     create_npcs(number)
@@ -64,11 +64,12 @@ async def get_npcs_temp(number: int = Query(default=5, le=500)):
     return {"npcs_temp": npc_dict_temp}
 
 @app.get("/npc_names")
-async def get_npc_names(number: int = Query(default=5000, ge=1, le=50000)):
-    #tempoarary measure to have only a certain number of items
-    #in a semi-persistent list, this is for testing purposes
-    trim_dict_items(persistant_npc_dict)
-
-    # original function will come back to this later
+async def get_npc_names(number: int = Query(default=50, le=5000)):
     npc_na = npc_names(persistant_npc_dict)
     return {"npc_names": npc_na}
+
+@app.get("/clear_npcs")
+async def clear_npcs():
+    # Clears the 'npc' dictionary
+    persistant_npc_dict["npc"].clear()
+    return {"message": "NPC dictionary cleared successfully."}
