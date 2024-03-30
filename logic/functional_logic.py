@@ -1,5 +1,4 @@
 from important_classes.npc import *
-from itertools import islice
 
 persistant_npc_dict = {"npc": {}}
 
