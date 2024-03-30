@@ -64,7 +64,7 @@ async def get_npcs_temp(number: int = Query(default=5, le=500)):
     return {"npcs_temp": npc_dict_temp}
 
 @app.get("/npc_names")
-async def get_npc_names(number: int = Query(default=50, le=5000)):
+async def get_npc_names(number: int = Query(default=5000, le=50000)):
     npc_na = npc_names(persistant_npc_dict)
     return {"npc_names": npc_na}
 
