@@ -3,7 +3,11 @@ from name_dict import *
 from equipment import *
 
 class Npc():
+    _id_counter = 0
+
     def __init__(self):
+        Npc._id_counter +=1
+        self.id = Npc._id_counter
         self.first_name = random.choice(list(F_NAMES_DICT.values()))
         self.last_name = random.choice(list(L_NAMES_DICT.values()))
         self.name = f"{self.first_name} {self.last_name}"
