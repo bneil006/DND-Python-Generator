@@ -5,7 +5,6 @@ from important_classes.npc import *
 from logic.functional_logic import *
 from models import *
 import time
-import os
 
 app = FastAPI()
 
