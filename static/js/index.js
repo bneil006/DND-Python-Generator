@@ -24,10 +24,25 @@ function fetchFullNpcDetails() {
                     const collapsibleContent = document.createElement('div');
                     collapsibleContent.classList.add('collapsible-content');
                     collapsibleContent.style.maxHeight = '0'; // Initially hidden
+                    
+                    // Level
+                    const levelInfo = document.createElement('p');
+                    levelInfo.innerHTML = `<strong>Level:</strong> ${npcData.level}`;
+                    collapsibleContent.appendChild(levelInfo);
 
+                    // HP
+                    const hpInfo = document.createElement('p');
+                    hpInfo.innerHTML = `<strong>HP:</strong> ${npcData.hp}`;
+                    collapsibleContent.appendChild(hpInfo);
+
+                    // General Race Info
                     const generalRaceInfo = document.createElement('p');
                     generalRaceInfo.innerHTML = `<strong>General Race Info:</strong> ${npcData.special_race_info}`;
                     collapsibleContent.appendChild(generalRaceInfo);
+
+                    levelInfo.setAttribute('id', 'card-element')
+                    hpInfo.setAttribute('id', 'card-element')
+                    generalRaceInfo.setAttribute('id', 'card-element')
 
                     // Stat Block
                     const statBlockDiv = document.createElement('div');

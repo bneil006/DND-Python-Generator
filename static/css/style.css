@@ -97,6 +97,12 @@ button:hover {
     background-color: #008170;
 }
 
+#card-element {
+    color: rgb(228, 204, 70);
+    margin-top: 5px;
+    margin-bottom: 5px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 1200px) {
     .npc-detail { width: calc(25% - 20px); }
