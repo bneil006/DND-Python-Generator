@@ -22,3 +22,18 @@ def generate_names(first_elements, last_elements, num_names):
         last_name = generate_name(last_elements)
         names.append(f"{first_name} {last_name}")
     return names
+
+
+## EQUIPMENT GENERATION ##
+
+
+# def generate_items(first_element, second_element, vocation):
+#     strength_builders = {
+#     "prefixes": ["Aer", "Al", "Am", "Ar", "Bel", "Bran", "Cael", "Cor", "Dae", "El", "Faer", "Gaer", "Haer", "Ia", "Ja", "Kae", "La", "Mae", "Na", "Oa", "Pa", "Quae", "Rae", "Sae", "Tae", "Ua", "Va", "Wae", "Xae", "Yae", "Zae", "Ly", "Mer", "Niv", "Ori", "Per", "Quin", "Ri", "So", "Tha", "Ul", "Ve", "Wil", "Xy", "Yo", "Zo", "Evan", "Fio", "Gwen", "Hal", "Is", "Jo", "Kas", "Lor", "Mir", "Nys", "Ol", "Pax", "Quor", "Riv", "Ser", "Tyr", "Uri", "Val", "Wyn", "Xan", "Ys", "Zan"],
+#     "suffixes": ["is", "el", "an", "in", "as", "os", "us", "ent", "ard", "or", "ric", "elis", "ira", "ara", "ana", "yn", "ith", "ath", "ael", "iel", "wen", "ess", "ine", "lyn", "ith", "old", "yst", "ard", "eon", "ior", "ain", "en", "on", "van", "il", "al", "er"]
+#     }
+
+# vocation = {
+#     "STRENGTH BUILDER": generate_items(1, 2, 3),
+
+# }

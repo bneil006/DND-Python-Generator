@@ -9,6 +9,8 @@ def add_npc_to_dict(npc, npc_dict):
             "race": npc.npc_race_name,
             "subrace": npc.npc_subrace,
             "class": npc.npc_class,
+            "hp": npc.npc_hp,
+            "level": npc.npc_level,
             "special_race_info": npc.special_info,
             "stat_block": npc.stat_block,
             "starting_pack": npc.starting_pack

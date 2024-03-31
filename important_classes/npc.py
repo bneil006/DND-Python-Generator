@@ -1,6 +1,6 @@
 import random
-from important_classes.equipment import *
-from important_classes.name_generator import *
+import important_classes.equipment as equipment
+from important_classes.generators import *
 
 def choose_random_item(dictionary):
     return random.choice(list(dictionary.values()))
@@ -22,13 +22,15 @@ class Npc():
         self.npc_subrace = self.npc_race_instance.subrace
         self.special_info = self.npc_race_instance.class_race_info()
         self.stat_block = self.npc_race_instance.BASE_STATS.copy()
-        self.starting_pack = choose_random_item(STARTING_EQUIPMENT_PACKS)
+        self.highest_stat = self.npc_race_instance.highest_modifier()
+        self.starting_pack = equipment.choose_pack(self.highest_stat)
+        
 
         #Add HP
         #Add Level
 
-        self.npc_hp = 0
-        self.npc_level = 0
+        self.npc_hp = 8
+        self.npc_level = 1
 
 class Races():
     def __init__(self):
@@ -54,6 +56,16 @@ class Races():
                         point_buy -= next_cost
                         break
     
+    def highest_modifier(self):
+        current_highest = 0
+        highest_stat = ""
+        for a, b in self.BASE_STATS.items():
+            if b > current_highest:
+                current_highest = b
+                highest_stat = a
+        
+        return highest_stat
+    
     # Will try to impliment this later
     def additional_modifier_points(self, name, amount, desc):
         additions = self.npc_additional_stat_modifiers = {
@@ -63,6 +75,7 @@ class Races():
         }
         self.npc_additional_stat_modifiers.update(additions)
         return self.npc_additional_stat_modifiers
+    
 
 class Dwarf(Races):
     def __init__(self):

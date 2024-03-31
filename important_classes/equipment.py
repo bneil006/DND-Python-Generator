@@ -1,41 +1,62 @@
+import important_classes.npc as npc
+
 class Equipement():
     def __init__(self):
+        # self.pack = npc
         pass
 
-STARTING_EQUIPMENT_PACKS = {
-    "Burglar's Pack": [
-        "PLACEHOLDER - ADD WEAPONS LATER",
-        "PLACEHOLDER - ADD ARMOR LATER",
-        "PLACEHOLDER - ADD ADDITIONALS"
+EQUIPMENT_PACKS = {
+    "STR": [
+        "Greatsword or Battleaxe",
+        "Chain Mail",
+        "Iron Gauntlets"
     ],
-    "Diplomat's Pack": [
-        "PLACEHOLDER - ADD WEAPONS LATER",
-        "PLACEHOLDER - ADD ARMOR LATER",
-        "PLACEHOLDER - ADD ADDITIONALS"
+    "DEX": [
+        "Rapier or Shortbow",
+        "Leather Armor",
+        "Thieves' Tools"
     ],
-    "Dungeoneer's Pack": [
-        "PLACEHOLDER - ADD WEAPONS LATER",
-        "PLACEHOLDER - ADD ARMOR LATER",
-        "PLACEHOLDER - ADD ADDITIONALS"
+    "CON": [
+        "Warhammer",
+        "Scale Mail",
+        "Shield"
     ],
-    "Entertainer's Pack": [
-        "PLACEHOLDER - ADD WEAPONS LATER",
-        "PLACEHOLDER - ADD ARMOR LATER",
-        "PLACEHOLDER - ADD ADDITIONALS"
+    "INT": [
+        "Quarterstaff",
+        "Robes",
+        "Spellbook"
     ],
-    "Explorer's Pack": [
-        "PLACEHOLDER - ADD WEAPONS LATER",
-        "PLACEHOLDER - ADD ARMOR LATER",
-        "PLACEHOLDER - ADD ADDITIONALS"
+    "WIS": [
+        "Mace",
+        "Padded Armor",
+        "Holy Symbol"
     ],
-    "Priest's Pack": [
-        "PLACEHOLDER - ADD WEAPONS LATER",
-        "PLACEHOLDER - ADD ARMOR LATER",
-        "PLACEHOLDER - ADD ADDITIONALS"
+    "CHA": [
+        "Longsword",
+        "Fine Clothes",
+        "Musical Instrument (e.g., Lute, Flute)"
     ],
-    "Scholar's Pack": [
-        "PLACEHOLDER - ADD WEAPONS LATER",
-        "PLACEHOLDER - ADD ARMOR LATER",
-        "PLACEHOLDER - ADD ADDITIONALS"
-    ]
 }
+
+EQUIPMENT_PACK_SCHEMES = {
+    "STR": {
+        "Armor": {
+            "Helm": [],
+            "Chest": [],
+            "Bracers": [],
+            "Leggings": [],
+            "Shoes": [],
+            "Cape": []
+        },
+        "Weapons": {
+            "Main Hand": [],
+            "Off Hand": [],
+            "Ranged": []
+        },
+        "Trinkets": [],
+        "Other": []
+        },
+}
+
+def choose_pack(stat):
+    return EQUIPMENT_PACKS[stat]
