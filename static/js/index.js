@@ -44,7 +44,7 @@ function fetchFullNpcDetails() {
                     // Starting Pack
                     const packDiv = document.createElement('div');
                     const packHeader = document.createElement('h4');
-                    packHeader.textContent = 'Starting Pack:';
+                    packHeader.textContent = 'Gear & Equipment:';
                     packDiv.appendChild(packHeader);
                     const packList = document.createElement('ul');
                     npcData.starting_pack.forEach(item => {
