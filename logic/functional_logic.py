@@ -7,7 +7,7 @@ def add_npc_to_dict(npc, npc_dict):
         npc_dict[npc.name] = {
             "id": npc.id,
             "race": npc.npc_race_name,
-            "subrace": npc.npc_race_instance.subrace,
+            "subrace": npc.npc_subrace,
             "class": npc.npc_class,
             "special_race_info": npc.special_info,
             "stat_block": npc.stat_block,

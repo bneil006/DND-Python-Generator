@@ -16,9 +16,12 @@ class Npc():
         self.name = f"{self.first_name} {self.last_name}"
         self.npc_class = choose_random_item(NPC_CLASS_DICT)
         chosen_race = choose_random_item(NPC_RACE_DICT)
-        self.npc_race_name, self.npc_race_instance = chosen_race
+        chosen_race_name, chosen_race_class = choose_random_item(NPC_RACE_DICT)
+        self.npc_race_instance = chosen_race_class()  # Instantiate the race class here
+        self.npc_race_name = chosen_race_name
+        self.npc_subrace = self.npc_race_instance.subrace
         self.special_info = self.npc_race_instance.class_race_info()
-        self.stat_block = self.npc_race_instance.base_stat_modifiers()
+        self.stat_block = self.npc_race_instance.BASE_STATS.copy()
         self.starting_pack = choose_random_item(STARTING_EQUIPMENT_PACKS)
 
         #Add HP
@@ -29,29 +32,27 @@ class Npc():
 
 class Races():
     def __init__(self):
-        self.BASE_STATS = {
-            "STR": 0,
-            "DEX": 0,
-            "CON": 0,
-            "INT": 0,
-            "WIS": 0,
-            "CHA": 0
-        }
-        self.subrace_dict = {}
-        self.subrace = None
+        self.BASE_STATS = {"STR": 8, "DEX": 8, "CON": 8, "INT": 8, "WIS": 8, "CHA": 8}
+        self.base_stat_modifiers()
 
     def class_race_info(self):
         return "Generic class race information"
-    
-    def subrace_picker(self):
-        if self.subrace_dict:
-            self.subrace = random.choice(list(self.subrace_dict.values()))
-        else:
-            self.subrace = "None"
-        return self.subrace
-    
+
     def base_stat_modifiers(self):
-        return self.BASE_STATS
+        point_buy = 27
+        cost_table = {8: 0, 9: 1, 10: 2, 11: 3, 12: 4, 13: 5, 14: 7, 15: 9}
+        stats_keys = list(self.BASE_STATS.keys())
+        
+        while point_buy > 0:
+            random.shuffle(stats_keys)
+            for stat_modifier in stats_keys:
+                stat_level = self.BASE_STATS[stat_modifier]
+                if stat_level < 15:
+                    next_cost = cost_table.get(stat_level + 1, float('inf')) - cost_table.get(stat_level, 0)
+                    if point_buy >= next_cost:
+                        self.BASE_STATS[stat_modifier] += 1
+                        point_buy -= next_cost
+                        break
     
     # Will try to impliment this later
     def additional_modifier_points(self, name, amount, desc):
@@ -65,196 +66,159 @@ class Races():
 
 class Dwarf(Races):
     def __init__(self):
+        self.subrace_dict = {1: "Hill Dwarf", 2: "Mountain Dwarf"}
+        self.subrace = random.choice(list(self.subrace_dict.values()))
         super().__init__()
-        self.subrace_dict = {
-            1: "Hill Dwarf",
-            2: "Mountain Dwarf"
-        }
-        self.subrace = self.subrace_picker()
-        self.base_stat_modifiers()
+        self.subrace_stat_modifiers()
 
     def class_race_info(self):
         return "Stout, skilled in craft and combat, with a strong sense of kinship and tradition."
     
-    def base_stat_modifiers(self):
-        modified_stats = self.BASE_STATS.copy()
-        modified_stats["CON"] += 2
+    def subrace_stat_modifiers(self):
+        self.BASE_STATS["CON"] += 2
         if self.subrace == "Hill Dwarf":
-            modified_stats["WIS"] += 1
-        else:
-            modified_stats["STR"] += 2
-        return modified_stats
+            self.BASE_STATS["WIS"] += 1
+        elif self.subrace == "Mountain Dwarf":
+            self.BASE_STATS["STR"] += 2
 
 class Elf(Races):
     def __init__(self):
+        self.subrace_dict = {1: "High Elf", 2: "Wood Elf", 3: "Dark Elf"}
+        self.subrace = random.choice(list(self.subrace_dict.values()))
         super().__init__()
-        self.subrace_dict = {
-            1: "High Elf",
-            2: "Wood Elf",
-            3: "Dark Elf"
-        }
-        self.subrace = self.subrace_picker()
-        self.base_stat_modifiers()
+        self.subrace_stat_modifiers()
 
     def class_race_info(self):
         return "Ancient, magical, and graceful, with a deep bond to nature and art."
     
-    def base_stat_modifiers(self):
-        modified_stats = self.BASE_STATS.copy()
-        modified_stats["DEX"] += 2
+    def subrace_stat_modifiers(self):
+        self.BASE_STATS["DEX"] += 2
         if self.subrace == "High Elf":
-            modified_stats["INT"] += 1
+            self.BASE_STATS["INT"] += 1
         elif self.subrace == "Wood Elf":
-            modified_stats["WIS"] += 1
+            self.BASE_STATS["WIS"] += 1
         else:
-            modified_stats["CHA"] += 1
-        return modified_stats
+            self.BASE_STATS["CHA"] += 1
 
 class Halfling(Races):
     def __init__(self):
+        self.subrace_dict = {1: "Lightfoot Halfling", 2: "Stout Halfling"}
+        self.subrace = random.choice(list(self.subrace_dict.values()))
         super().__init__()
-        self.subrace_dict = {
-            1: "Lightfoot Halfling",
-            2: "Stout Halfling"
-        }
-        self.subrace = self.subrace_picker()
-        self.base_stat_modifiers()
+        self.subrace_stat_modifiers()
 
     def class_race_info(self):
         return "Cheerful and resourceful small folk who cherish community and comfort."
     
-    def base_stat_modifiers(self):
-        modified_stats = self.BASE_STATS.copy()
-        modified_stats["DEX"] += 2
+    def subrace_stat_modifiers(self):
+        self.BASE_STATS["DEX"] += 2
         if self.subrace == "Lightfoot Halfling":
-            modified_stats["CHA"] += 1
+            self.BASE_STATS["CHA"] += 1
         else:
-            modified_stats["CON"] += 1
-        return modified_stats
+            self.BASE_STATS["CON"] += 1
 
 class Human(Races):
     def __init__(self):
-        super().__init__()
         self.subrace = None
-        self.subrace = self.subrace_picker()
-        self.base_stat_modifiers()
+        super().__init__()
+        self.subrace_stat_modifiers()
 
     def class_race_info(self):
         return "Remarkably diverse and ambitious, thriving on innovation and exploration."
     
-    def base_stat_modifiers(self):
-        modified_stats = self.BASE_STATS.copy()
-        modified_stats["STR"] += 1
-        modified_stats["DEX"] += 1
-        modified_stats["CON"] += 1
-        modified_stats["INT"] += 1
-        modified_stats["WIS"] += 1
-        modified_stats["CHA"] += 1
-        return modified_stats
+    def subrace_stat_modifiers(self):
+        self.BASE_STATS["STR"] += 1
+        self.BASE_STATS["DEX"] += 1
+        self.BASE_STATS["CON"] += 1
+        self.BASE_STATS["INT"] += 1
+        self.BASE_STATS["WIS"] += 1
+        self.BASE_STATS["CHA"] += 1
 
 class Dragonborn(Races):
     def __init__(self):
-        super().__init__()
         self.subrace = None
-        self.subrace = self.subrace_picker()
-        self.base_stat_modifiers()
+        super().__init__()
+        self.subrace_stat_modifiers()
 
     def class_race_info(self):
         return "Proud, dragon-blooded warriors with a natural command of power and respect."
     
-    def base_stat_modifiers(self):
-        modified_stats = self.BASE_STATS.copy()
-        modified_stats["STR"] += 2
-        modified_stats["CHA"] += 1
-        return modified_stats
+    def subrace_stat_modifiers(self):
+        self.BASE_STATS["STR"] += 2
+        self.BASE_STATS["CHA"] += 1
 
 class Gnome(Races):
     def __init__(self):
+        self.subrace_dict = {1: "Forest Gnome", 2: "Rock Gnome"}
+        self.subrace = random.choice(list(self.subrace_dict.values()))
         super().__init__()
-        self.subrace_dict = {
-            1: "Forest Gnome",
-            2: "Rock Gnome"
-        }
-        self.subrace = self.subrace_picker()
-        self.base_stat_modifiers()
+        self.subrace_stat_modifiers()
 
     def class_race_info(self):
         return "Inventive and curious, blending mischief with a keen intellect."
     
-    def base_stat_modifiers(self):
-        modified_stats = self.BASE_STATS.copy()
-        modified_stats["INT"] += 2
+    def subrace_stat_modifiers(self):
+        self.BASE_STATS["INT"] += 2
         if self.subrace == "Forest Gnome":
-            modified_stats["DEX"] += 1
+            self.BASE_STATS["DEX"] += 1
         else:
-            modified_stats["CON"] += 1
-        return modified_stats
+            self.BASE_STATS["CON"] += 1
 
 class Half_elf(Races):
     def __init__(self):
-        super().__init__()
         self.subrace = None
-        self.subrace = self.subrace_picker()
-        self.base_stat_modifiers()
+        super().__init__()
+        self.subrace_stat_modifiers()
 
     def class_race_info(self):
         return "Versatile and charismatic, bridging the gap between human and elven worlds."
     
-    def base_stat_modifiers(self):
+    def subrace_stat_modifiers(self):
         additional_modified_stats = self.BASE_STATS.copy()
         del additional_modified_stats["CHA"]
 
-        modified_stats = self.BASE_STATS.copy()
-        modified_stats["CHA"] += 2
+        self.BASE_STATS["CHA"] += 2
 
         for i in range(0, 2):
             random_stat_selection = random.choice(list(additional_modified_stats))
-            modified_stats[random_stat_selection] += 1
-
-        return modified_stats
+            self.BASE_STATS[random_stat_selection] += 1
 
 class Half_orc(Races):
     def __init__(self):
-        super().__init__()
         self.subrace = None
-        self.subrace = self.subrace_picker()
-        self.base_stat_modifiers()
+        super().__init__()
+        self.subrace_stat_modifiers()
 
     def class_race_info(self):
         return "Strong and tenacious, often battling against prejudice with fierce loyalty."
     
-    def base_stat_modifiers(self):
-        modified_stats = self.BASE_STATS.copy()
-        modified_stats["STR"] += 2
-        modified_stats["CON"] += 1
-        return modified_stats
+    def subrace_stat_modifiers(self):
+        self.BASE_STATS["STR"] += 2
+        self.BASE_STATS["CON"] += 1
 
 class Tiefling(Races):
     def __init__(self):
-        super().__init__()
         self.subrace = None
-        self.subrace = self.subrace_picker()
-        self.base_stat_modifiers()
+        super().__init__()
+        self.subrace_stat_modifiers()
 
     def class_race_info(self):
         return "Mystical and misunderstood, bearing the mark of their infernal heritage with defiance."
     
-    def base_stat_modifiers(self):
-        modified_stats = self.BASE_STATS.copy()
-        modified_stats["INT"] += 1
-        modified_stats["CHA"] += 2
-        return modified_stats
+    def subrace_stat_modifiers(self):
+        self.BASE_STATS["INT"] += 1
+        self.BASE_STATS["CHA"] += 2
 
 NPC_RACE_DICT = {
-    1: ["Dwarf", Dwarf()],
-    2: ["Elf", Elf()],
-    3: ["Halfling", Halfling()],
-    4: ["Human", Human()],
-    5: ["Dragonborn", Dragonborn()],
-    6: ["Gnome", Gnome()],
-    7: ["Half Elf", Half_elf()],
-    8: ["Half Orc", Half_orc()],
-    9: ["Tiefling", Tiefling()]
+    1: ["Dwarf", Dwarf],
+    2: ["Elf", Elf],
+    3: ["Halfling", Halfling],
+    4: ["Human", Human],
+    5: ["Dragonborn", Dragonborn],
+    6: ["Gnome", Gnome],
+    7: ["Half Elf", Half_elf],
+    8: ["Half Orc", Half_orc],
+    9: ["Tiefling", Tiefling]
 }
 
 NPC_CLASS_DICT = {
