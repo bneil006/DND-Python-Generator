@@ -1,98 +1,127 @@
 body {
     font-family: 'Arial', sans-serif;
     padding: 20px;
-    background-color: #1e1722; /* Updated background color */
-    color: white; /* Make all text outside the cards white */
+    background-color: #0F0F0F; /* Dark background */
+    color: #EAEAEA; /* Light text color */
+}
+
+.header-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Allow items to wrap on smaller screens */
+    margin-bottom: 20px;
+}
+
+.header-container h1 {
+    flex-grow: 1;
+}
+
+input[type="number"] {
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    margin-right: 10px;
+    width: auto; /* Adjust input width as needed */
 }
 
 #npc-full-list {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
-    gap: 20px; /* Space between cards */
+    gap: 20px;
 }
 
 .npc-detail {
-    background-color: #ffffff;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    background-color: #232D3F; /* Lighter card color */
+    color: #EAEAEA; /* Light text color inside cards */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
     border-radius: 10px;
-    padding: 15px; /* Reduced padding to decrease card height */
-    width: calc(20% - 20px); /* Adjust card width here */
+    padding: 10px;
+    width: calc(20% - 20px);
     box-sizing: border-box;
-    margin-bottom: 20px; /* Space below each card */
-    color: black; /* Make text inside the cards black */
+    margin-bottom: 20px;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-.npc-detail h3, .npc-detail h4 {
-    color: #333333;
-    margin-top: 0;
-    margin-bottom: 10px; /* Reduced margin for headers */
+.npc-detail:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 10px rgba(0,0,0,0.6);
 }
 
-.npc-detail p, .npc-detail li {
-    color: #666666;
-    font-size: 14px;
-    line-height: 1.2; /* Reduced line height for compactness */
-    margin-bottom: 4px; /* Reduced bottom margin for less space between elements */
+.collapsible-content {
+    overflow: hidden;
+    transition: max-height 0.2s ease-in-out;
+    max-height: 0;
+}
+
+.collapsible-content > *:not(:last-child) {
+    margin-bottom: 15px; /* Adds more space between collapsible content sections */
+}
+
+.collapsible-content > div {
+    padding: 3px;
+    background-color: #232D3F; /* Sub-sections background for visual separation */
+    border-radius: 5px;
+}
+
+/* Reduced spacing for a more compact look */
+.npc-detail h3, .npc-detail h4, .npc-detail p, .npc-detail li {
+    margin: 5px 0;
 }
 
 .npc-detail ul {
     list-style-type: none; /* Remove bullet points */
     padding: 0;
-    margin: 0;
 }
 
-
-/* Display stats inline */
-.stat-block {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between; /* Space out stat elements */
-    margin-bottom: 10px; /* Space below the stat block */
-}
-
-.stat-block li {
-    width: 48%; /* Adjust width to fit two stats per line */
-    text-align: left; /* Align text to the left */
+/* Styling for the stat block to display inline */
+.stat-block p {
+    display: inline-block;
+    margin-right: 10px;
 }
 
 /* Button styling */
 button {
-    background-color: #244225; /* Green background */
-    color: white; /* White text */
-    padding: 10px 20px; /* Padding inside the button */
-    border: none; /* Remove default border */
-    border-radius: 5px; /* Rounded corners */
-    cursor: pointer; /* Pointer cursor on hover */
-    font-size: 16px; /* Increase font size */
-    margin: 5px; /* Space between buttons */
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: none;
+    background-color: #005B41;
+    color: white;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
 button:hover {
-    background-color: #2b302b; /* Darker shade of green on hover */
+    background-color: #008170;
 }
 
 /* Responsive adjustments */
 @media (max-width: 1200px) {
-    .npc-detail {
-        width: calc(25% - 20px); /* 4 cards per row */
-    }
+    .npc-detail { width: calc(25% - 20px); }
 }
 
 @media (max-width: 992px) {
-    .npc-detail {
-        width: calc(33.3333% - 20px); /* 3 cards per row */
-    }
+    .npc-detail { width: calc(33.3333% - 20px); }
 }
 
 @media (max-width: 768px) {
-    .npc-detail {
-        width: calc(50% - 20px); /* 2 cards per row */
+    .header-container {
+        justify-content: center;
+        text-align: center;
+    }
+
+    .header-container h1 {
+        margin-bottom: 10px; /* Add some space between the title and the input/button on small screens */
+        flex-basis: 100%; /* Ensure the title takes the full width */
+    }
+
+    input[type="number"], button {
+        margin: 5px; /* Reduce margin for small screens */
     }
 }
 
 @media (max-width: 576px) {
-    .npc-detail {
-        width: 100%; /* 1 card per row */
-    }
+    .npc-detail { width: 100%; }
 }

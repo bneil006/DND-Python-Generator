@@ -1,56 +1,6 @@
-function fetchNpcNames() {
-    fetch('/npc_names')
-    .then(response => response.json())
-    .then(data => {
-        const npcNamesList = document.getElementById('npc-names-list');
-        if (data.npc_names && data.npc_names.length > 0) {
-        const list = document.createElement('ul');
-        data.npc_names.forEach(name => {
-            const item = document.createElement('li');
-            item.textContent = name;
-            list.appendChild(item);
-        });
-        npcNamesList.appendChild(list);
-        } else {
-        npcNamesList.textContent = 'No NPC names found.';
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching NPC names:', error);
-        document.getElementById('npc-names-list').textContent = 'Failed to load NPC names.';
-    });
-}
-
-function fetchTempNpcNames() {
-    fetch('/npcs_generator_temp?number=5')
-    .then(response => response.json())
-    .then(data => {
-        const npcNamesListElement = document.getElementById('npc-names-list');
-        npcNamesListElement.innerHTML = ''; // Clear previous content
-
-        // Correct the path according to your API response
-        if (data.npcs_temp && data.npcs_temp.npc && Object.keys(data.npcs_temp.npc).length > 0) {
-            const list = document.createElement('ul');
-            
-            // Iterate over the NPC names correctly
-            Object.keys(data.npcs_temp.npc).forEach(npcName => {
-                const item = document.createElement('li');
-                item.textContent = npcName; // Display the NPC name
-                list.appendChild(item);
-            });
-            npcNamesListElement.appendChild(list);
-        } else {
-            npcNamesListElement.textContent = 'No NPC names found.';
-        }
-    })
-    .catch(error => {
-        console.error('Error fetching NPC names:', error);
-        npcNamesListElement.textContent = 'Failed to load NPC names.';
-    });
-}
-
 function fetchFullNpcDetails() {
-    fetch('/npcs_generator_temp?number=5')
+    const npcCount = document.getElementById('npcCount').value || 5; // Default to 5 NPCs if input is empty
+    fetch(`/npcs_generator_temp?number=${npcCount}`)
         .then(response => response.json())
         .then(data => {
             const npcFullListElement = document.getElementById('npc-full-list');
@@ -59,51 +9,58 @@ function fetchFullNpcDetails() {
             if (data.npcs_temp && data.npcs_temp.npc && Object.keys(data.npcs_temp.npc).length > 0) {
                 Object.keys(data.npcs_temp.npc).forEach(npcName => {
                     const npcData = data.npcs_temp.npc[npcName];
-
-                    // Create a container for each NPC's details
                     const npcDetailDiv = document.createElement('div');
-                    npcDetailDiv.classList.add('npc-detail'); // For styling purposes
+                    npcDetailDiv.classList.add('npc-detail');
 
-                    // NPC Name
-                    const nameHeader = document.createElement('h3');
-                    nameHeader.textContent = npcName;
-                    npcDetailDiv.appendChild(nameHeader);
+                    const visibleContentDiv = document.createElement('div');
+                    visibleContentDiv.innerHTML = `
+                        <h3>${npcName}</h3>
+                        <p><strong>Race:</strong> ${npcData.race}</p>
+                        <p><strong>Subrace:</strong> ${npcData.subrace || "None"}</p>
+                        <p><strong>Class:</strong> ${npcData.class}</p>
+                    `;
+                    npcDetailDiv.appendChild(visibleContentDiv);
 
-                    // NPC properties excluding the starting pack and stat block
-                    Object.keys(npcData).forEach(key => {
-                        if (key !== "starting_pack" && key !== "stat_block") {
-                            const detailParagraph = document.createElement('p');
-                            detailParagraph.textContent = `${key}: ${npcData[key]}`;
-                            npcDetailDiv.appendChild(detailParagraph);
-                        }
-                    });
+                    const collapsibleContent = document.createElement('div');
+                    collapsibleContent.classList.add('collapsible-content');
+                    collapsibleContent.style.maxHeight = '0'; // Initially hidden
 
-                    // NPC Stat Block
+                    const generalRaceInfo = document.createElement('p');
+                    generalRaceInfo.innerHTML = `<strong>General Race Info:</strong> ${npcData.special_race_info}`;
+                    collapsibleContent.appendChild(generalRaceInfo);
+
+                    // Stat Block
+                    const statBlockDiv = document.createElement('div');
                     const statBlockHeader = document.createElement('h4');
                     statBlockHeader.textContent = 'Stat Block:';
-                    npcDetailDiv.appendChild(statBlockHeader);
-                    const statBlockDiv = document.createElement('div'); // Changed to div for inline display
-                    statBlockDiv.className = 'stat-block';
+                    statBlockDiv.appendChild(statBlockHeader);
                     Object.entries(npcData.stat_block).forEach(([statName, value]) => {
-                        const statItem = document.createElement('div'); // Changed to div for each stat
-                        statItem.textContent = `${statName}: ${value}`;
+                        const statItem = document.createElement('p');
+                        statItem.innerHTML = `<strong>${statName}:</strong> ${value}`;
                         statBlockDiv.appendChild(statItem);
                     });
-                    npcDetailDiv.appendChild(statBlockDiv);
+                    collapsibleContent.appendChild(statBlockDiv);
 
-                    // NPC Starting Pack (array handling)
+                    // Starting Pack
+                    const packDiv = document.createElement('div');
                     const packHeader = document.createElement('h4');
                     packHeader.textContent = 'Starting Pack:';
-                    npcDetailDiv.appendChild(packHeader);
+                    packDiv.appendChild(packHeader);
                     const packList = document.createElement('ul');
                     npcData.starting_pack.forEach(item => {
                         const itemLi = document.createElement('li');
                         itemLi.textContent = item;
                         packList.appendChild(itemLi);
                     });
-                    npcDetailDiv.appendChild(packList);
+                    packDiv.appendChild(packList);
+                    collapsibleContent.appendChild(packDiv);
 
-                    // Append this NPC's details to the main list container
+                    npcDetailDiv.appendChild(collapsibleContent);
+                    visibleContentDiv.addEventListener('click', function() {
+                        const isCollapsed = collapsibleContent.style.maxHeight === '' || collapsibleContent.style.maxHeight === '0px';
+                        collapsibleContent.style.maxHeight = isCollapsed ? `${collapsibleContent.scrollHeight}px` : '0';
+                    });
+
                     npcFullListElement.appendChild(npcDetailDiv);
                 });
             } else {
@@ -116,3 +73,15 @@ function fetchFullNpcDetails() {
         });
 }
 
+document.getElementById('toggleAll').addEventListener('click', function() {
+    const allCollapsibleContent = document.querySelectorAll('.collapsible-content');
+    let isAnyExpanded = Array.from(allCollapsibleContent).some(content => content.style.maxHeight !== '' && content.style.maxHeight !== '0px');
+    
+    allCollapsibleContent.forEach(content => {
+        if (isAnyExpanded) {
+            content.style.maxHeight = '0';
+        } else {
+            setTimeout(() => content.style.maxHeight = content.scrollHeight + 'px', 10);
+        }
+    });
+});
