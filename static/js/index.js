@@ -1,5 +1,5 @@
 function fetchFullNpcDetails() {
-    const npcCount = document.getElementById('npcCount').value || 5; // Default to 5 NPCs if input is empty
+    const npcCount = document.getElementById('npcCount').value || 15;
     fetch(`/npcs_generator_temp?number=${npcCount}`)
         .then(response => response.json())
         .then(data => {

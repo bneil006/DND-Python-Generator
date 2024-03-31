@@ -8,11 +8,12 @@ import time
 import os
 
 app = FastAPI()
+
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
 @app.get("/")
 async def root():
-    return {"message": f"Hello world"}
+    return FileResponse('static/index.html')
 
 @app.get("/npcs/{npc_id}")
 async def get_npc(npc_id: int):
