@@ -21,6 +21,12 @@ class Npc():
         self.stat_block = self.npc_race_instance.base_stat_modifiers()
         self.starting_pack = choose_random_item(STARTING_EQUIPMENT_PACKS)
 
+        #Add HP
+        #Add Level
+
+        self.npc_hp = 0
+        self.npc_level = 0
+
 class Races():
     def __init__(self):
         self.BASE_STATS = {
@@ -46,6 +52,16 @@ class Races():
     
     def base_stat_modifiers(self):
         return self.BASE_STATS
+    
+    # Will try to impliment this later
+    def additional_modifier_points(self, name, amount, desc):
+        additions = self.npc_additional_stat_modifiers = {
+            "item": [name],
+            "amount": [amount],
+            "desc": [desc]
+        }
+        self.npc_additional_stat_modifiers.update(additions)
+        return self.npc_additional_stat_modifiers
 
 class Dwarf(Races):
     def __init__(self):
