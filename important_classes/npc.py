@@ -1,9 +1,12 @@
 import random
 import important_classes.equipment as equipment
-from important_classes.generators import *
+import important_classes.generators as gen
 
 def choose_random_item(dictionary):
     return random.choice(list(dictionary.values()))
+
+def choose_pack(stat, pack):
+            return pack[stat]
 
 class Npc():
     _id_counter = 0
@@ -11,8 +14,8 @@ class Npc():
     def __init__(self):
         Npc._id_counter += 1
         self.id = Npc._id_counter
-        self.first_name = generate_name(first_name_elements)
-        self.last_name = generate_name(last_name_elements)
+        self.first_name = gen.generate_name(gen.first_name_elements)
+        self.last_name = gen.generate_name(gen.last_name_elements)
         self.name = f"{self.first_name} {self.last_name}"
         self.npc_class = choose_random_item(NPC_CLASS_DICT)
         chosen_race = choose_random_item(NPC_RACE_DICT)
@@ -23,14 +26,63 @@ class Npc():
         self.special_info = self.npc_race_instance.class_race_info()
         self.stat_block = self.npc_race_instance.BASE_STATS.copy()
         self.highest_stat = self.npc_race_instance.highest_modifier()
-        self.starting_pack = equipment.choose_pack(self.highest_stat)
-        
-
-        #Add HP
-        #Add Level
-
         self.npc_hp = 8
         self.npc_level = 1
+
+        self.main_weapon = equipment.choose_main_weapon(self.highest_stat)
+        self.secondary_weapon = equipment.choose_secondary_weapon(self.highest_stat)
+        self.chest = equipment.choose_chest(self.highest_stat)
+        self.trinket = equipment.choose_trinket(self.highest_stat)
+        self.other = equipment.choose_other(self.highest_stat)
+
+        ### CHOOSING GEAR ###
+        self.EQUIPMENT_PACKS = {
+            "STR": [
+                self.main_weapon,
+                self.secondary_weapon,
+                self.chest,
+                self.trinket,
+                self.other
+                ],
+            "DEX": [
+                self.main_weapon,
+                self.secondary_weapon,
+                self.chest,
+                self.trinket,
+                self.other
+                ],
+            "CON": [
+                self.main_weapon,
+                self.secondary_weapon,
+                self.chest,
+                self.trinket,
+                self.other
+            ],
+            "INT": [
+                self.main_weapon,
+                self.secondary_weapon,
+                self.chest,
+                self.trinket,
+                self.other
+            ],
+            "WIS": [
+                self.main_weapon,
+                self.secondary_weapon,
+                self.chest,
+                self.trinket,
+                self.other
+            ],
+            "CHA": [
+                self.main_weapon,
+                self.secondary_weapon,
+                self.chest,
+                self.trinket,
+                self.other
+            ],
+        }
+
+        self.starting_pack = choose_pack(self.highest_stat, self.EQUIPMENT_PACKS)
+
 
 class Races():
     def __init__(self):
