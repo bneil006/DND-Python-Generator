@@ -1,19 +1,43 @@
 from fastapi import FastAPI, Query, HTTPException
-from fastapi.responses import FileResponse
+from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from important_classes.npc import *
 from logic.functional_logic import *
 from models import *
 import time
 
+
+
 app = FastAPI()
 
 app.mount("/static", StaticFiles(directory="static"), name="static")
 
+### PAGES ###
 @app.get("/")
 async def root():
-    return FileResponse('static/index.html')
+    return FileResponse("static/index.html")
 
+@app.get("/npc_gen")
+async def npc_gen():
+    return FileResponse("static/npc_gen.html")
+
+## INTERNAL TEST ##
+@app.get("/design")
+async def design():
+    return FileResponse("static/work.html")
+
+from work import *
+@app.get("/design_result")
+async def design_result(brand: str = Query(default="Hanwha"), watt: int = Query(default=405), panel_count: float = Query(default=10), roof_size: float = Query(default=2000)):
+    try:
+        result = module_roof_percentage(brand, watt, panel_count, roof_size)
+        return JSONResponse(content={"result": result})
+    except KeyError:
+        return JSONResponse(content={"error": "The specified panel size does not exist. Please enter a new size."}, status_code=400)
+
+## INTERNAL TEST ##
+
+### APIs ###
 @app.get("/npcs/{npc_id}")
 async def get_npc(npc_id: int):
     for npc_name, npc_details in persistant_npc_dict["npc"].items():

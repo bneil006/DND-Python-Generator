@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DND 5e NPC Generator</title>
+    <link rel="stylesheet" href="/static/css/style.css">
+</head>
+<body>
+    <div class="header-container">
+        <h1>Welcome to my DND 5e NPC Generator</h1>
+        <div class="controls">
+            <input type="number" id="npcCount" placeholder="Number of NPCs" min="1" max="100" value="5" />
+            <button type="button" onclick="fetchFullNpcDetails()">Generate Full NPCs</button>
+            <button type="button" id="toggleAll">Toggle All</button>
+        </div>
+    </div>
+    <p>Placeholder text, testing backend Python & FastAPI functionality with front end, JavaScript, Html & CSS</p>
+    <br>
+    <div id="npc-full-list"></div>
+    <script src="/static/js/npc_gen.js"></script>
+</body>
+</html>

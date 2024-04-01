@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Work Design Help</title>
+    <link rel="stylesheet" href="/static/css/work.css">
+</head>
+<body>
+    <div class="header-container">
+        <h1>Design Helper</h1>
+        <div class="controls">
+            <form id="moduleForm">
+                <label for="brandSelect">Brand:</label>
+                <select id="brandSelect" name="brand">
+                    <option value="Hanwha">Hanwha</option>
+                    <option value="REC">REC</option>
+                </select>
+        
+                <label for="wattInput">Wattage:</label>
+                <input type="text" id="wattInput" name="watt" placeholder="Enter wattage" required>
+        
+                <label for="panelCountInput">Number of Panels:</label>
+                <input type="number" id="panelCountInput" name="panel_count" placeholder="Enter number of panels" required>
+        
+                <label for="roofSizeInput">Roof Size (sqft):</label>
+                <input type="number" id="roofSizeInput" name="roof_size" placeholder="Enter roof size in sqft" required>
+        
+                <button type="submit">Calculate</button>
+            </form>
+        </div>
+        <div id="result"></div>               
+    </div>
+    <p></p>
+    <br>
+    <div id="npc-full-list"></div>
+    <script src="/static/js/work.js"></script>
+</body>
+</html>
