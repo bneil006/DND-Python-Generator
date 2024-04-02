@@ -55,13 +55,13 @@ function fetchFullNpcDetails() {
                     });
                     collapsibleContent.appendChild(statBlockDiv);
 
-                    // Starting Pack
+                    // Equipment Pack
                     const packDiv = document.createElement('div');
                     const packHeader = document.createElement('h4');
                     packHeader.textContent = 'Gear & Equipment:';
                     packDiv.appendChild(packHeader);
                     const packList = document.createElement('ul');
-                    npcData.starting_pack.forEach(item => {
+                    npcData.equipment_pack.forEach(item => {
                         const itemLi = document.createElement('li');
                         itemLi.textContent = item;
                         packList.appendChild(itemLi);

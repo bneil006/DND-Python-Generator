@@ -81,12 +81,15 @@ class Npc():
             ],
         }
 
-        self.starting_pack = choose_pack(self.highest_stat, self.EQUIPMENT_PACKS)
+        self.equipment_pack = choose_pack(self.highest_stat, self.EQUIPMENT_PACKS)
+        self.bonus_stats = self.npc_race_instance.bonus_stats
+        print(self.bonus_stats)
 
 
 class Races():
     def __init__(self):
         self.BASE_STATS = {"STR": 8, "DEX": 8, "CON": 8, "INT": 8, "WIS": 8, "CHA": 8}
+        self.bonus_stats = {"details": []}
         self.base_stat_modifiers()
 
     def class_race_info(self):
@@ -117,17 +120,6 @@ class Races():
                 highest_stat = a
         
         return highest_stat
-    
-    # Will try to impliment this later
-    def additional_modifier_points(self, name, amount, desc):
-        additions = self.npc_additional_stat_modifiers = {
-            "item": [name],
-            "amount": [amount],
-            "desc": [desc]
-        }
-        self.npc_additional_stat_modifiers.update(additions)
-        return self.npc_additional_stat_modifiers
-    
 
 class Dwarf(Races):
     def __init__(self):
@@ -141,10 +133,26 @@ class Dwarf(Races):
     
     def subrace_stat_modifiers(self):
         self.BASE_STATS["CON"] += 2
+        self.bonus_stats["details"].append({
+            "name": "Dwarf Racial Bonus",
+            "stat_name": "CON",
+            "bonus_amount": 2
+        })
+
         if self.subrace == "Hill Dwarf":
             self.BASE_STATS["WIS"] += 1
+            self.bonus_stats["details"].append({
+            "name": "Hill Dwarf Subracial Bonus",
+            "stat_name": "WIS",
+            "bonus_amount": 1
+        })
         elif self.subrace == "Mountain Dwarf":
             self.BASE_STATS["STR"] += 2
+            self.bonus_stats["details"].append({
+            "name": "Mountain Dwarf Subracial Bonus",
+            "stat_name": "STR",
+            "bonus_amount": 2
+        })
 
 class Elf(Races):
     def __init__(self):
@@ -158,12 +166,32 @@ class Elf(Races):
     
     def subrace_stat_modifiers(self):
         self.BASE_STATS["DEX"] += 2
+        self.bonus_stats["details"].append({
+            "name": "Elf Racial Bonus",
+            "stat_name": "DEX",
+            "bonus_amount": 2
+        })
         if self.subrace == "High Elf":
             self.BASE_STATS["INT"] += 1
+            self.bonus_stats["details"].append({
+            "name": "High Elf subracial Bonus",
+            "stat_name": "INT",
+            "bonus_amount": 1
+        })
         elif self.subrace == "Wood Elf":
             self.BASE_STATS["WIS"] += 1
+            self.bonus_stats["details"].append({
+            "name": "Wood Elf subracial Bonus",
+            "stat_name": "WIS",
+            "bonus_amount": 1
+        })
         else:
             self.BASE_STATS["CHA"] += 1
+            self.bonus_stats["details"].append({
+            "name": "Dark Elf subracial Bonus",
+            "stat_name": "CHA",
+            "bonus_amount": 1
+        })
 
 class Halfling(Races):
     def __init__(self):
