@@ -1,6 +1,6 @@
 from fastapi import APIRouter
-from Endpoint_dicts.classes import *
-from Endpoint_dicts.races import *
+from endpoint_dicts.classes import *
+from endpoint_dicts.races import *
 
 
 

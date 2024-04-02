@@ -16,7 +16,6 @@ RACE_DICT = {
             "skill_proficiencies": [],
             "tool_proficiencies": [],
             "weapon_proficiencies": [],
-            "armor_proficiencies": [],
             "special_abilities": [
                 {
                     "name": "Breath Weapon",
@@ -43,11 +42,10 @@ RACE_DICT = {
             "size": "Medium",
             "speed": 25,
             "languages": ["Common", "Dwarvish"],
-            "vision": "Darkvision (60 feet)",
+            "vision": "Darkvision",
             "skill_proficiencies": [],
             "tool_proficiencies": ["Smiths tools", "Brewers supplies","Masons tools"],
             "weapon_proficiencies": ["Battleaxe", "Handaxe", "Light hammer", "Warhammer"],
-            "armor_proficiencies": [],
             "special_abilities": [],
             "physical_description": "Dwarves are solid and enduring like the mountains they love, weathering the passage of centuries with stoic endurance and little change.",
             "traits": {
@@ -85,11 +83,10 @@ RACE_DICT = {
         "size": "Medium",
         "speed": 30,
         "languages": ["Common", "Elvish"],
-        "vision": "Darkvision (60 feet)",
+        "vision": "Darkvision",
         "skill_proficiencies": [],
         "tool_proficiencies": [],
         "weapon_proficiencies": [],
-        "armor_proficiencies": [],
         "special_abilities": [
             {
                 "name": "Fey Ancestry",
@@ -154,11 +151,10 @@ RACE_DICT = {
         "size": "Small",
         "speed": 25,
         "languages": ["Common", "Gnomish"],
-        "vision": "Darkvision (60 feet)",
+        "vision": "Darkvision",
         "skill_proficiencies": [],
         "tool_proficiencies": [],
         "weapon_proficiencies": [],
-        "armor_proficiencies": [],
         "special_abilities": [
             {
                 "name": "Gnome Cunning",
@@ -200,12 +196,11 @@ RACE_DICT = {
         "alignment": "Half-Elves share the chaotic bent of their elven heritage. They value both personal freedom and creative expression, demonstrating neither love of leaders nor desire for followers. They chafe at rules, resent others’ demands, and sometimes prove unreliable, or at least unpredictable.",
         "size": "Medium",
         "speed": 30,
-        "languages": ["Common", "Elvish", "One extra language of your choice"],
-        "vision": "Darkvision (60 feet)",
-        "skill_proficiencies": ["Two skills of your choice"],
+        "languages": ["Common", "Elvish"],
+        "vision": "Darkvision",
+        "skill_proficiencies": [],
         "tool_proficiencies": [],
         "weapon_proficiencies": [],
-        "armor_proficiencies": [],
         "special_abilities": [
             {
                 "name": "Fey Ancestry",
@@ -219,7 +214,7 @@ RACE_DICT = {
         "physical_description": "Half-Elves stand taller than humans but shorter than elves. They inherit a mix of physical features from their human and elven parents, and their ears are pointed, though less dramatically so than an elf's. They have the same range of complexions as humans and elves, making them as diverse as either race.",
         "traits": {},
         "subraces": [],
-        "other": ["Two other ability scores of your choice: +1"],
+        "other": ["Two other ability scores of your choice: +1", "One extra language of your choice", "Two skills of your choice"],
         },
         {
         "index": "half-orc",
@@ -230,11 +225,10 @@ RACE_DICT = {
         "size": "Medium",
         "speed": 30,
         "languages": ["Common", "Orc"],
-        "vision": "Darkvision (60 feet)",
+        "vision": "Darkvision",
         "skill_proficiencies": [],
         "tool_proficiencies": [],
         "weapon_proficiencies": [],
-        "armor_proficiencies": [],
         "special_abilities": [
             {
                 "name": "Relentless Endurance",
@@ -263,7 +257,6 @@ RACE_DICT = {
         "skill_proficiencies": [],
         "tool_proficiencies": [],
         "weapon_proficiencies": [],
-        "armor_proficiencies": [],
         "special_abilities": [
             {
                 "name": "Lucky",
@@ -311,17 +304,16 @@ RACE_DICT = {
         "alignment": "Humans tend towards no particular alignment. The best and the worst are found among them.",
         "size": "Medium",
         "speed": 30,
-        "languages": ["Common", "One extra language of your choice"],
+        "languages": ["Common"],
         "vision": "Normal",
         "skill_proficiencies": [],
         "tool_proficiencies": [],
         "weapon_proficiencies": [],
-        "armor_proficiencies": [],
         "special_abilities": [],
         "physical_description": "Humans vary widely in height and build, from barely 5 feet to well over 6 feet tall. Skin tones range from dark to light and everything in between. Their hair and eye colors are similarly varied.",
         "traits": {},
         "subraces": [],
-        "other": [],
+        "other": ["One extra language of your choice"],
         },
         {
         "index": "tiefling",
@@ -332,11 +324,10 @@ RACE_DICT = {
         "size": "Medium",
         "speed": 30,
         "languages": ["Common", "Infernal"],
-        "vision": "Darkvision (60 feet)",
+        "vision": "Darkvision",
         "skill_proficiencies": [],
         "tool_proficiencies": [],
         "weapon_proficiencies": [],
-        "armor_proficiencies": [],
         "special_abilities": [
             {
                 "name": "Hellish Resistance",
@@ -352,5 +343,49 @@ RACE_DICT = {
         "subraces": [],
         "other": [],
         },
+
+        # {
+        #     "index": "dwarf",
+        #     "name": "Dwarf",
+        #     "ability_score_increases": {"CON": 2},
+        #     "age": "Mature at the same rate as humans, but are considered young until they reach 50. Live about 350 years.",
+        #     "alignment": "Most dwarves are lawful, with a strong sense of fair play and a belief that everyone deserves to share in the benefits of a just order.",
+        #     "size": "Medium",
+        #     "speed": 25,
+        #     "languages": ["Common", "Dwarvish"],
+        #     "vision": "Darkvision",
+        #     "skill_proficiencies": [],
+        #     "tool_proficiencies": ["Smiths tools", "Brewers supplies","Masons tools"],
+        #     "weapon_proficiencies": ["Battleaxe", "Handaxe", "Light hammer", "Warhammer"],
+        #     "special_abilities": [],
+        #     "physical_description": "Dwarves are solid and enduring like the mountains they love, weathering the passage of centuries with stoic endurance and little change.",
+        #     "traits": {
+                
+        #     },
+        #     "subraces": 
+        #     [
+        #         {
+        #             "index": "hill-dwarf",
+        #             "name": "Test Dwarf",
+        #             "ability_score_increases": {"WIS": 1, "TEST1": 9},
+        #             "skill_proficiencies": ["TEST1 SKILL_PROFICIENCIES", "TEST2 SKILL_PROFICIENCIES"],
+        #             "traits": {
+        #                 "TEST SUBCLASS #1 TRAIT #1": "You have TEST1 Subclass #1",
+        #                 "TEST SUBCLASS #1 TRAIT #2": "You have TEST2 Subclass #1"
+        #             }
+        #         },
+        #         {
+        #             "index": "hill-dwarf",
+        #             "name": "Test Dwarf",
+        #             "ability_score_increases": {"WIS": 1, "TEST1": 9},
+        #             "skill_proficiencies": ["TEST1 SKILL_PROFICIENCIES", "TEST2 SKILL_PROFICIENCIES"],
+        #             "traits": {
+        #                 "TEST SUBCLASS #2 TRAIT #1": "You have TEST1 Subclass #2",
+        #                 "TEST SUBCLASS #2 TRAIT #2": "You have TEST2 Subclass #2"
+        #             }
+        #         },
+        #     ],
+        #     "other": ["TEST1", "TEST2", "TEST3"],
+        # },
     ]
 }
