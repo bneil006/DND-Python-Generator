@@ -1,51 +1,40 @@
 import endpoint_dicts.races as races
+import endpoint_dicts.classes as classes
+import important_classes.equipment as equipment
+import important_classes.generators as gen
 import random
 
-class Npc():
+def choose_pack(stat, pack):
+            return pack[stat]
+
+class Random_Npc():
     _id_counter = 0
 
-    def __init__(self):
-        Npc._id_counter += 1
-        self.id = Npc._id_counter
+    def choose_race(self):
+        race_choice = random.choice(races.RACE_DICT["results"])
+        if race_choice["subraces"]:
+            subrace_choice = random.choice(list(race_choice["subraces"]))
+        else:
+            subrace_choice = {
+                "index": None,
+                "name": None,
+                "ability_score_increases": None,
+                "skill_proficiencies": None,
+                "traits": None
+                }
 
-def parse_races_dict(race_name, subrace_name):
-    race_info = None  # Placeholder for race information
-    subrace_info = None  # Placeholder for subrace information
+        return race_choice, subrace_choice
     
-    for race in races.RACE_DICT["results"]:
-        if race["index"] == race_name:
-            race_info = {
-                "index": race["index"],
-                "name": race["name"],
-                "ability_score_increases": race["ability_score_increases"],
-                "age": race["age"],
-                "alignment": race["alignment"],
-                "size": race["size"],
-                "speed": race["speed"],
-                "languages": race["languages"],
-                "vision": race["vision"],
-                "skill_proficiencies": race["skill_proficiencies"],
-                "tool_proficiencies": race["tool_proficiencies"],
-                "weapon_proficiencies": race["weapon_proficiencies"],
-                "special_abilities": race["special_abilities"],
-                "physical_description": race["physical_description"],
-                "traits": race["traits"]
-            }
-            
-            for subrace in race.get("subraces", []):
-                if subrace["index"] == subrace_name:
-                    subrace_info = {
-                        "index": subrace["index"],
-                        "name": subrace["name"],
-                        "ability_score_increases": subrace["ability_score_increases"],
-                        "skill_proficiencies": subrace.get("skill_proficiencies", []),
-                        "traits": subrace["traits"]
-                    }
-                    break  # Stop searching once the subrace is found
-            
-            break  # Stop searching once the race is found
-    
-    return race_info, subrace_info
+    def choose_class(self):
+         return random.choice(classes.CLASS_DICT["results"])
+
+    def __init__(self):
+        Random_Npc._id_counter += 1
+        self.id = Random_Npc._id_counter
+        self.name = gen.generate_full_name(gen.first_name_elements, gen.last_name_elements)
+        self.race, self.subrace = Random_Npc.choose_race(self)
+        self.npc_class = Random_Npc.choose_class(self)
+        print(f"ID: {self.id}, Name: {self.name}, Race: {self.race["name"]}, Subrace: {self.subrace["name"]}, Class: {self.npc_class["name"]}")
 
 class Race:
     BASE_STATS = {"STR": 8, "DEX": 8, "CON": 8, "INT": 8, "WIS": 8, "CHA": 8}
@@ -80,9 +69,8 @@ class Race:
         highest_stat = max(self.stats, key=self.stats.get)
         return highest_stat, self.stats[highest_stat]
 
-def get_race_instance(race_name, subrace_name=None):
-    race_info, subrace_info = parse_races_dict(race_name, subrace_name)
-    if race_info is not None:
-        return Race(race_info, subrace_info)
-    else:
-        raise ValueError("Race not found")
+def create_random_npc(num):
+     for i in range(num):
+          Random_Npc()
+
+create_random_npc(5)

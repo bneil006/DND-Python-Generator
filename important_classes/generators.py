@@ -13,6 +13,12 @@ last_name_elements = {
 def generate_name(elements):
     return random.choice(elements["prefixes"]) + random.choice(elements["suffixes"])
 
+def generate_full_name(first_name_elements, last_name_elements):
+    first_name = random.choice(first_name_elements["prefixes"]) + random.choice(first_name_elements["suffixes"])
+    last_name = random.choice(last_name_elements["prefixes"]) + random.choice(last_name_elements["suffixes"])
+    name = f"{first_name} {last_name}"
+    return name
+
 # Incase I want to do a large generation later and add it to a dict, not sure
 # if that would be a good or bad idea, might make it easier than running this everytime?
 def generate_names(first_elements, last_elements, num_names):
