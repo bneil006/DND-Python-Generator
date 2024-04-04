@@ -1,4 +1,5 @@
 #### CHECK ALL OF THESE FOR CORRECTNESS LATER, FLEW THREW THE BOOKS & ONLINE RESOURCES TO FIND THIS MATERIAL ####
+## Testing to see if Mac Login good on GH & HEROKU ##
 
 RACE_DICT = {
     "results": 
