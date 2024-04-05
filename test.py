@@ -40,10 +40,12 @@ class Random_Npc():
         self.npc_class = Random_Npc.choose_class(self)
         self.npc_class_proficiencies = self.npc_class["proficiencies"]
         self.base_stats = self.set_base_stats()
-        self.npc_hp = self.set_health_points()
-        self.handling_level_ups()
+        self.npc_hp, self.npc_hp_rolled = self.set_health_points()
+        self.npc_information()
 
-        print(f"""Level: {self.npc_level}, HP: {self.npc_hp}, Name: {self.npc_name}, Class: {self.npc_class["name"]}
+    def npc_information(self):
+        print(f"""Hp Increase: {self.npc_hp_rolled}
+Level: {self.npc_level}, HP: {self.npc_hp}, Name: {self.npc_name}, Class: {self.npc_class["name"]}
 Race: {self.npc_race["name"]}, Subrace: {self.npc_subrace["name"]}, 
 Main Stat: {self.npc_class["main_stat"]}, Saving Throws: {self.npc_class_proficiencies["saving_throws"]}, Starting HP: {self.npc_class["starting_hp"]}
 Base Stats: {self.base_stats}""")
@@ -52,7 +54,11 @@ Base Stats: {self.base_stats}""")
         base_stats = {"STR": 8, "DEX": 8, "CON": 8, "INT": 8, "WIS": 8, "CHA": 8}
         for stat in base_stats:
                 if stat in self.npc_class_proficiencies["saving_throws"]:
-                    base_stats[stat] += 2
+                    base_stats[stat] += 4
+
+        if self.npc_level > 3:
+            base_stats[self.npc_class["main_stat"]] += 2
+
         return base_stats
     
     def set_health_points(self):
@@ -64,12 +70,7 @@ Base Stats: {self.base_stats}""")
             hp_stat_rolls.append(roll)
             base_hp += roll
 
-        print(hp_stat_rolls)
-        return base_hp
-    
-    def handling_level_ups(self):
-        if self.npc_level > 3:
-            self.base_stats[self.npc_class["main_stat"]] += 2
+        return base_hp, hp_stat_rolls
 
 def create_random_npc(num):
      for i in range(num):
