@@ -4,8 +4,6 @@ from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
 from important_classes.npc import *
 from models import *
-from test import *
-import time
 
 
 
