@@ -27,26 +27,31 @@ class Random_Npc():
     
     def choose_class(self):
          return random.choice(classes.CLASS_DICT["results"])
+    
+    def choose_level(self):
+          return random.randint(1, 5)
 
     def __init__(self):
         Random_Npc._id_counter += 1
         self.id = Random_Npc._id_counter
-        self.name = gen.generate_full_name(gen.first_name_elements, gen.last_name_elements)
+        self.npc_level = Random_Npc.choose_level(self)
+        self.npc_name = gen.generate_full_name(gen.first_name_elements, gen.last_name_elements)
         self.npc_race, self.npc_subrace = Random_Npc.choose_race(self)
         self.npc_class = Random_Npc.choose_class(self)
         self.npc_class_proficiencies = self.npc_class["proficiencies"]
         self.base_stats = self.set_base_stats()
 
-        print(f"""Name: {self.name}, Race: {self.npc_race["name"]}, Subrace: {self.npc_subrace["name"]}, 
+        print(f"""Level: {self.npc_level}, Name: {self.npc_name}, 
+Race: {self.npc_race["name"]}, Subrace: {self.npc_subrace["name"]}, 
 Saving Throws: {self.npc_class_proficiencies["saving_throws"]}
 Base Stats: {self.base_stats}""")
         
     def set_base_stats(self):
-            base_stats = {"STR": 8, "DEX": 8, "CON": 8, "INT": 8, "WIS": 8, "CHA": 8}
-            for stat in base_stats:
-                  if stat in self.npc_class_proficiencies["saving_throws"]:
-                        base_stats[stat] += 2
-            return base_stats
+        base_stats = {"STR": 8, "DEX": 8, "CON": 8, "INT": 8, "WIS": 8, "CHA": 8}
+        for stat in base_stats:
+                if stat in self.npc_class_proficiencies["saving_throws"]:
+                    base_stats[stat] += 2
+        return base_stats
 
 def create_random_npc(num):
      for i in range(num):
