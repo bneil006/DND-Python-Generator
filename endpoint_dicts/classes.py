@@ -7,6 +7,7 @@ CLASS_DICT = {
             "index": "barbarian",
             "name": "Barbarian",
             "hit_dice": "1d12",
+            "starting_hp": 12,
             "main_stat": "STR",
             "proficiencies": {
                 "armor": ["Light armor", "Medium armor", "Shields"],
@@ -60,6 +61,7 @@ CLASS_DICT = {
             "index": "bard",
             "name": "Bard",
             "hit_dice": "1d8",
+            "starting_hp": 8,
             "main_stat": "WIS",
             "proficiencies": {
                 "armor": ["Light armor"],
@@ -103,6 +105,7 @@ CLASS_DICT = {
             "index": "cleric",
             "name": "Cleric",
             "hit_dice": "1d8",
+            "starting_hp": 8,
             "main_stat": "WIS",
             "proficiencies": {
                 "armor": ["Light armor", "Medium armor", "Shields"],
@@ -146,6 +149,7 @@ CLASS_DICT = {
             "index": "druid",
             "name": "Druid",
             "hit_dice": "1d8",
+            "starting_hp": 8,
             "main_stat": "WIS",
             "proficiencies": {
                 "armor": ["Light armor (non-metal)", "Medium armor (non-metal)", "Shields (non-metal)"],
@@ -189,6 +193,7 @@ CLASS_DICT = {
             "index": "fighter",
             "name": "Fighter",
             "hit_dice": "1d10",
+            "starting_hp": 10,
             "main_stat": "STR",
             "proficiencies": {
                 "armor": ["All armor", "Shields"],
@@ -232,6 +237,7 @@ CLASS_DICT = {
             "index": "monk",
             "name": "Monk",
             "hit_dice": "1d8",
+            "starting_hp": 8,
             "main_stat": "DEX",
             "proficiencies": {
                 "armor": [],
@@ -275,6 +281,7 @@ CLASS_DICT = {
             "index": "paladin",
             "name": "Paladin",
             "hit_dice": "1d10",
+            "starting_hp": 10,
             "main_stat": "STR",
             "proficiencies": {
                 "armor": ["All armor", "Shields"],
@@ -318,6 +325,7 @@ CLASS_DICT = {
             "index": "ranger",
             "name": "Ranger",
             "hit_dice": "1d10",
+            "starting_hp": 10,
             "main_stat": "DEX",
             "proficiencies": {
                 "armor": ["Light armor", "Medium armor", "Shields"],
@@ -361,6 +369,7 @@ CLASS_DICT = {
             "index": "rogue",
             "name": "Rogue",
             "hit_dice": "1d8",
+            "starting_hp": 8,
             "main_stat": "DEX",
             "proficiencies": {
                 "armor": ["Light armor"],
@@ -404,6 +413,7 @@ CLASS_DICT = {
             "index": "sorcerer",
             "name": "Sorcerer",
             "hit_dice": "1d6",
+            "starting_hp": 6,
             "main_stat": "CHA",
             "proficiencies": {
                 "armor": [],
@@ -447,6 +457,7 @@ CLASS_DICT = {
             "index": "warlock",
             "name": "Warlock",
             "hit_dice": "1d8",
+            "starting_hp": 8,
             "main_stat": "CHA",
             "proficiencies": {
                 "armor": ["Light armor"],
@@ -490,6 +501,7 @@ CLASS_DICT = {
             "index": "wizard",
             "name": "Wizard",
             "hit_dice": "1d6",
+            "starting_hp": 6,
             "main_stat": "INT",
             "proficiencies": {
                 "armor": [],
