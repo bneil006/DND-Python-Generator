@@ -5,6 +5,7 @@ from fastapi.staticfiles import StaticFiles
 from important_classes.npc import *
 from logic.functional_logic import *
 from models import *
+from test import *
 import time
 
 
@@ -101,3 +102,9 @@ async def get_npc_names(number: int = Query(default=50000)):
 async def clear_npcs():
     persistant_npc_dict["npc"].clear()
     return {"message": "NPC dictionary cleared successfully."}
+
+
+@app.get("/npc_gen")
+async def get_npcs_temp(number: int = Query(default=5)):
+    npc_dict_temp = create_random_npc_temp_dict(number)
+    return {"npcs_temp": npc_dict_temp}
