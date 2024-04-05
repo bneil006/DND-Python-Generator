@@ -1,5 +1,5 @@
 from pydantic import BaseModel
-from important_classes.npc import *
+from npc import *
 
 class Npc_item(BaseModel):
     id: int

@@ -2,7 +2,7 @@ from fastapi import FastAPI, Query, HTTPException
 from end_points import router as end_points_router
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from important_classes.npc import *
+from npc import *
 from models import *
 
 

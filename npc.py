@@ -44,6 +44,7 @@ class RandomNPC():
         self.npc_class_proficiencies = self.npc_class["proficiencies"]
         self.base_stats = self.set_base_stats()
         self.npc_hp, self.npc_hp_rolled = self.set_health_points()
+        self.npc_equipment_choices = choose_pack(self.npc_class["main_stat"], equipment.npc_packs)
 
     def npc_information(self):
         print(f"""Hp Increase: {self.npc_hp_rolled}
@@ -74,10 +75,6 @@ Base Stats: {self.base_stats}""")
 
         return base_hp, hp_stat_rolls
 
-def create_random_npc(num):
-    for i in range(num):
-        RandomNPC()
-
 def create_random_npc_temp_dict(num):
     npc_dict_temp = {"npcs": []}
     for i in range(num):
@@ -91,6 +88,7 @@ def create_random_npc_temp_dict(num):
             "hp": npc.npc_hp,
             "level": npc.npc_level,
             "stat_block": npc.base_stats,
+            "equipment_pack": npc.npc_equipment_choices
         }
         npc_dict_temp["npcs"].append(npc_details)
     return npc_dict_temp
