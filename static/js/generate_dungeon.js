@@ -20,7 +20,7 @@ document.addEventListener('DOMContentLoaded', function() {
         loader.load('/generate_dungeon', function(gltf) {
             scene.add(gltf.scene);
             // Adjust the camera position as needed
-            camera.position.set(0, 20, 30);
+            camera.position.set(0, 10, 10);
             
             // Add OrbitControls
             const controls = new THREE.OrbitControls(camera, renderer.domElement);
