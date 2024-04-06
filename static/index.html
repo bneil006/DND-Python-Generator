@@ -3,21 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>DND 5e Generator</title>
+    <title>Detailed NPC</title>
     <link rel="stylesheet" href="static/css/style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="header-container">
-        <h1>DND 5e NPC Generator</h1>
-        <div class="controls">
-            <input type="number" id="npcCount" placeholder="Number of NPCs" min="1" max="100" value="5" />
-            <button type="button" id="generateNpcsBtn">Generate Full NPCs</button>
-            <button type="button" id="toggleAll">Toggle All</button>
+
+<div class="container">
+    <header>D&D 5e GENERATOR</header>
+    <aside>
+        <div class="sidebar-general">
+            <h3>5e GENERATORS</h3>
+            <!-- Possibly other sidebar content -->
         </div>
-    </div>
-    <p>Python & FastAPI backend with JavaScript, Html & CSS front end</p>
-    <br>
-    <div id="npc-full-list"></div>
-    <script src="static/js/index.js"></script>
+    </aside>
+    
+    <main>
+        <div class="center-general">
+            <div class="controls">
+                <h2>NPC GENERATOR</h2>
+                <input type="number" id="npc-number" placeholder="Number of NPCs" min="1" max="20">
+                <button id="generate-npcs">Generate NPCs</button>
+                <button id="toggle-filters">Toggle Filters</button>
+            </div>
+            <div class="npc-filters" id="npc-filters">
+                <!-- Filters here -->
+            </div>
+            <div id="npc-container">
+                <!-- NPC Cards will be dynamically inserted here -->
+            </div>
+        </div>        
+    </main>
+</div>
+
+<script src="static/js/index.js"></script>
 </body>
 </html>
