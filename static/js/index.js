@@ -41,15 +41,24 @@ document.addEventListener('DOMContentLoaded', function() {
         const raceClass = document.createElement('p');
         raceClass.textContent = `${npc.race} - ${npc.class}, Level: ${npc.level}`;
 
-        const stats = document.createElement('p');
-        stats.textContent = `Main Stat: ${npc.main_stat}, HP: ${npc.hp}`;
+        const mainStat = document.createElement('p');
+        mainStat.innerHTML = `HP: ${npc.hp}, Main Stat: ${npc.main_stat}<br>Saving Throws: ${npc.saving_throws}`;
+
+
+        const stats = Object.entries(npc.stat_block).map(([key, value]) => `${key}: ${value}`).join(', ');
+        const statBlock = document.createElement('div');
+        statBlock.innerHTML = `Stats:<br>${stats}`;
+
+
         
         const equipment = document.createElement('p');
-        equipment.textContent = `Equipment: ${npc.main_weapon}`
+        equipment.textContent = `Equipment: 
+        ${npc.main_weapon}, ${npc.secondary_weapon}, ${npc.armor}, ${npc.trinket}, ${npc.other_item}`
 
         card.appendChild(name);
         card.appendChild(raceClass);
-        card.appendChild(stats);
+        card.appendChild(mainStat);
+        card.appendChild(statBlock)
         card.appendChild(equipment)
 
         // Add more NPC details here as needed

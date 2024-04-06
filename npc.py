@@ -99,6 +99,7 @@ def create_random_npc_temp_dict(num):
             "level": npc.npc_level,
             "stat_block": npc.base_stats,
             "main_stat": npc.npc_class["main_stat"],
+            "saving_throws": npc.npc_class_proficiencies["saving_throws"],
             "main_weapon": npc.npc_main_weapon,
             "secondary_weapon": npc.npc_secondary_weapon,
             "armor": npc.npc_armor,

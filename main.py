@@ -27,7 +27,7 @@ async def detailed_npc():
 
 #### APIs ####
 @app.get("/gen_npc")
-async def get_npcs_temp(number: int = Query(default=5, le=500000)):
+async def get_npcs_temp(number: int = Query(default=5, le=5000)):
     npc_dict_temp = create_random_npc_temp_dict(number)
     return {"npcs_temp": npc_dict_temp}
 
