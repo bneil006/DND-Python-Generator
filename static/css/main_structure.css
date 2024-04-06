@@ -1,9 +1,10 @@
-/* CSS FOR GENERAL CONSTRUCTION OF SITE LAYOUT */
-
 body, html {
     margin: 0;
     padding: 0;
     height: 100%;
+    font-family: 'Nanum Gothic Coding', monospace;
+    background-color: #282c34;
+    color: #abb2bf;
 }
 
 .container {
@@ -13,80 +14,140 @@ body, html {
         "sidebar main";
     grid-template-columns: 250px 1fr;
     grid-template-rows: auto 1fr;
-    height: 100%;
+    height: 100vh;
 }
 
 header {
     grid-area: header;
-    background: #1B1B1B;
-    color: #EAEAEA;
+    background: #3a3f4b;
+    color: #61dafb;
     padding: 20px;
     text-align: center;
-    border-bottom: 1px solid #c49618e3;
+    font-size: 1.5em;
 }
 
 aside {
     grid-area: sidebar;
-    background: #414141;
-    color: #EAEAEA;
+    background: #21252b;
+    color: #9da5b4;
     padding: 20px;
-    border-right: 1px solid #c49618e3;
+    overflow-y: auto;
 }
 
 main {
     grid-area: main;
-    background: #a5a5a5;
-    color: #EAEAEA;
+    background: #282c34;
     padding: 20px;
-    overflow: auto;
+    overflow-y: auto;
+}
+
+.controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.controls h2 {
+    margin: 0;
+    flex: 1;
+}
+
+#npc-number {
+    flex-grow: 1;
+    margin: 0 10px;
+    padding: 10px;
+    width: auto;
+    background-color: #3a3f4b;
+    color: #61dafb;
+    border: 1px solid #61dafb;
+    border-radius: 5px;
+}
+
+#generate-npcs, #toggle-filters {
+    padding: 10px 15px;
+    background-color: #61dafb;
+    color: #282c34;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    border-radius: 5px;
+}
+
+#generate-npcs:hover, #toggle-filters:hover {
+    background-color: #4fa8d7;
+}
+
+.npc-filters {
+    display: none;
+    padding: 10px;
+    margin-bottom: 20px;
+    background: #21252b;
+    border-radius: 8px;
+}
+
+#npc-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+
+.npc-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: #3a3f4b;
+    color: #61dafb;
+    border-radius: 8px;
+    padding: 20px;
+    margin: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    width: 100%;
+    max-width: 300px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.npc-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
 @media (max-width: 767px) {
     .container {
         grid-template-areas:
             "header"
-            "sidebar"
-            "main";
+            "main"
+            "sidebar";
         grid-template-columns: 1fr;
         grid-template-rows: auto;
     }
-
-    aside {
+    
+    aside, main {
         width: 100%;
+    }
+    
+    .controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .controls > * {
+        margin-top: 10px;
+    }
+    
+    #npc-number, #generate-npcs, #toggle-filters {
+        width: auto; /* Allows each element to expand to the full width */
     }
 }
 
-/* CSS FOR GENERAL CONSTRUCTION OF SITE LAYOUT */
-
-/* CSS FOR SIDE BAR CONTENT */
-
-.sidebar-general {
-    font-family: "Nanum Gothic Coding";
+@media (min-width: 768px) {
+    .npc-card {
+        width: calc(50% - 20px); /* Adjusts for a 2-column layout */
+    }
 }
 
-/* CSS FOR CENTER CONTENT */
-
-.center-general {
-    font-family: "Nanum Gothic Coding";
-    text-align: center;
-    color: #000000;
-}
-
-.npc-filters {
-    font-size: 14px;
-    border-style:double;
-    border-width: 3px;
-    border-color: #000000;
-    border-radius: 10px;
-    padding: 5px;
-}
-
-.npc-card {
-    font-size: 18px;
-    background-color: #c49618e3; /* Dark background for the card */
-    border-radius: 3px; /* Optional: rounds the corners of the card */
-    padding: 10px; /* Adds space inside the card */
-    margin: 10px auto; /* Centers the card and adds space around it */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Optional: adds a subtle shadow for depth */
-    max-width: 600px; /* Restricts card width for better readability */
+@media (min-width: 1024px) {
+    .npc-card {
+        width: calc(33% - 20px); /* Adjusts for a 3-column layout on larger screens */
+    }
 }
