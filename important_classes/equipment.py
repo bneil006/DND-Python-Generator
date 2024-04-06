@@ -1,22 +1,4 @@
-import important_classes.generators as gen
-import random
-
-def choose_main_weapon(stat):
-    return random.choice(npc_packs[stat]["main_weapon"])
-
-def choose_secondary_weapon(stat):
-    return random.choice(npc_packs[stat]["secondary_weapon"])
-
-def choose_chest(stat):
-    return random.choice(npc_packs[stat]["chest"])
-
-def choose_trinket(stat):
-    return random.choice(npc_packs[stat]["trinket"])
-
-def choose_other(stat):
-    return random.choice(npc_packs[stat]["other"])
-
-npc_packs = {
+NPC_PACKS = {
     "STR": {
         "main_weapon": ["Greatsword", "Battleaxe", "Warhammer", "Longsword"],
         "secondary_weapon": ["Handaxe", "Dagger", "Light Hammer", "Javelin"],
@@ -59,26 +41,4 @@ npc_packs = {
         "trinket": ["Signet Ring", "Cloak of the Bat", "Instrument of the Bards"],
         "other": ["Diplomat's Pack", "Disguise Kit", "Perfume", "Letter of Marque"]
     }
-}
-
-
-
-EQUIPMENT_PACK_SCHEMES = {
-    "STR": {
-        "Armor": {
-            "Helm": [],
-            "Chest": [],
-            "Bracers": [],
-            "Leggings": [],
-            "Shoes": [],
-            "Cape": []
-        },
-        "Weapons": {
-            "Main Hand": [],
-            "Off Hand": [],
-            "Ranged": []
-        },
-        "Trinkets": [],
-        "Other": []
-        },
 }

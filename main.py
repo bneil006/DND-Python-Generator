@@ -2,8 +2,8 @@ from fastapi import FastAPI, Query, HTTPException
 from end_points import router as end_points_router
 from fastapi.responses import FileResponse, JSONResponse
 from fastapi.staticfiles import StaticFiles
-from npc import *
 from models import *
+from npc import *
 
 
 
@@ -22,10 +22,6 @@ async def root():
 async def get_npcsss_temp(number: int = Query(default=5)):
     npc_dict_temp = create_random_npc_temp_dict(number)
     return {"npcs_temp": npc_dict_temp}
-
-
-
-
 
 
 #### INTERNAL TEST ####

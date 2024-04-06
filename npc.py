@@ -44,7 +44,7 @@ class RandomNPC():
         self.npc_class_proficiencies = self.npc_class["proficiencies"]
         self.base_stats = self.set_base_stats()
         self.npc_hp, self.npc_hp_rolled = self.set_health_points()
-        self.npc_equipment_choices = choose_pack(self.npc_class["main_stat"], equipment.npc_packs)
+        self.npc_main_weapon, self.npc_secondary_weapon, self.npc_armor, self.npc_trinket, self.npc_other_item = self.set_npc_items()
 
     def npc_information(self):
         print(f"""Hp Increase: {self.npc_hp_rolled}
@@ -74,6 +74,16 @@ Base Stats: {self.base_stats}""")
             base_hp += roll
 
         return base_hp, hp_stat_rolls
+    
+    def set_npc_items(self):
+        equipment_selection = choose_pack(self.npc_class["main_stat"], equipment.NPC_PACKS)
+
+        weapon = random.choice(list(equipment_selection["main_weapon"]))
+        secondary_weapon = random.choice(list(equipment_selection["secondary_weapon"]))
+        armor = random.choice(list(equipment_selection["chest"]))
+        trinket = random.choice(list(equipment_selection["trinket"]))
+        other_item = random.choice(list(equipment_selection["other"]))
+        return weapon, secondary_weapon, armor, trinket, other_item
 
 def create_random_npc_temp_dict(num):
     npc_dict_temp = {"npcs": []}
@@ -88,7 +98,14 @@ def create_random_npc_temp_dict(num):
             "hp": npc.npc_hp,
             "level": npc.npc_level,
             "stat_block": npc.base_stats,
-            "equipment_pack": npc.npc_equipment_choices
+            "main_stat": npc.npc_class["main_stat"],
+            "main_weapon": npc.npc_main_weapon,
+            "secondary_weapon": npc.npc_secondary_weapon,
+            "armor": npc.npc_armor,
+            "trinket": npc.npc_trinket,
+            "other_item": npc.npc_other_item
         }
         npc_dict_temp["npcs"].append(npc_details)
     return npc_dict_temp
+
+print(create_random_npc_temp_dict(1))
