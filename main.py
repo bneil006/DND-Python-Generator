@@ -17,11 +17,22 @@ app.include_router(end_points_router)
 async def root():
     return FileResponse("static/index.html")
 
+@app.get("/detailed_npc")
+async def detailed_npc():
+    return FileResponse("static/detailed_npc.html")
+
+
+
+
+
 #### APIs ####
 @app.get("/gen_npc")
-async def get_npcsss_temp(number: int = Query(default=5)):
+async def get_npcs_temp(number: int = Query(default=5)):
     npc_dict_temp = create_random_npc_temp_dict(number)
     return {"npcs_temp": npc_dict_temp}
+
+
+
 
 
 #### INTERNAL TEST ####

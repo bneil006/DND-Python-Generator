@@ -1,0 +1,64 @@
+/* CSS FOR GENERAL CONSTRUCTION OF SITE LAYOUT */
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+.container {
+    display: grid;
+    grid-template-areas:
+        "header header"
+        "sidebar main";
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+}
+
+header {
+    grid-area: header;
+    background: #1B1B1B;
+    color: #EAEAEA;
+    padding: 20px;
+    text-align: center;
+    border-bottom: 1px solid #c5b100;
+}
+
+aside {
+    grid-area: sidebar;
+    background: #414141;
+    color: #EAEAEA;
+    padding: 20px;
+    border-right: 1px solid #c5b100;
+}
+
+main {
+    grid-area: main;
+    background: #a5a5a5;
+    color: #EAEAEA;
+    padding: 20px;
+    overflow: auto;
+}
+
+@media (max-width: 767px) {
+    .container {
+        grid-template-areas:
+            "header"
+            "sidebar"
+            "main";
+        grid-template-columns: 1fr;
+        grid-template-rows: auto;
+    }
+
+    aside {
+        width: 100%;
+    }
+}
+
+/* CSS FOR GENERAL CONSTRUCTION OF SITE LAYOUT */
+/* CSS FOR CENTER CONTENT */
+
+.npc-header, .npc-name {
+    color: #000000;
+}

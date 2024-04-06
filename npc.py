@@ -107,5 +107,3 @@ def create_random_npc_temp_dict(num):
         }
         npc_dict_temp["npcs"].append(npc_details)
     return npc_dict_temp
-
-print(create_random_npc_temp_dict(1))
