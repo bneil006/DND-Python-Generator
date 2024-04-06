@@ -110,35 +110,39 @@ main {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
+/* Other styles remain unchanged */
+
 @media (max-width: 767px) {
     .container {
         grid-template-columns: 1fr; /* Full width on mobile */
-        grid-template-areas:
+        grid-template-areas: 
             "header"
             "main"
             "sidebar";
     }
-
-    aside {
-        display: none; /* Optionally hide the sidebar on smaller screens */
+    
+    aside, .controls, #npc-number, #generate-npcs, #toggle-filters {
+        display: none; /* Hide sidebar and controls in the initial mobile layout adjustment */
     }
 
-    .controls, .controls > * {
-        flex-grow: 1;
-        width: auto; /* Ensure controls take full width on smaller screens */
+    .controls {
         flex-direction: column;
-        align-items: center; /* Center-align the controls on mobile */
+        justify-content: center;
+        align-items: center;
+        width: 100%; /* Ensure the controls container takes full width */
+    }
+
+    .controls > * {
+        width: 90%; /* Make children (input, buttons) fill a majority of the container width */
+        margin: 8px 0; /* Add some vertical spacing */
     }
 
     #npc-number, #generate-npcs, #toggle-filters {
-        margin: 5px 0; /* Add some vertical spacing on mobile */
+        display: block; /* Ensure these elements are displayed */
     }
     
-    #npc-container {
-        justify-content: center; /* Center cards in the container on mobile */
-    }
-
-    .npc-card {
+    #npc-container .npc-card {
         width: calc(100% - 40px); /* Adjust card width on smaller screens */
+        margin: 10px auto; /* Center cards with automatic horizontal margins */
     }
 }
