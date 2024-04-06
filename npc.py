@@ -1,5 +1,6 @@
 import endpoint_dicts.races as races
 import endpoint_dicts.classes as classes
+import endpoint_dicts.npc_specifics as specifics
 import important_classes.equipment as equipment
 import important_classes.generators as gen
 import random
@@ -85,6 +86,24 @@ Base Stats: {self.base_stats}""")
         other_item = random.choice(list(equipment_selection["other"]))
         return weapon, secondary_weapon, armor, trinket, other_item
 
+    def set_npc_specifics(self):
+        specific_choices = specifics.NPC_SPECIFICS["npc_traits"]
+        personality = random.choice(list(specific_choices["personalities_good"])) + " but " + random.choice(list(specific_choices["personalities_bad"]))
+        background = random.choice(list(specific_choices["backgrounds"]))
+        motivation = random.choice(list(specific_choices["motivations_what"])) + " " + random.choice(list(specific_choices["motivations_why"]))
+        hair_style = random.choice(list(specific_choices["hair_length"])) + " " + random.choice(list(specific_choices["hair_color"]))
+        other = random.choice(list(specific_choices["other"]))
+        return personality, background, motivation, hair_style, other
+    
+    def describe_npc(self):
+        personality, background, motivation, hair_style, other = self.set_npc_specifics()
+        description = f"""Your NPC is {personality}.
+They are a {background}.
+Their motivation is to {motivation}.
+Their hair is {hair_style}.
+Other features about them are: {other}"""
+        return description
+
 def create_random_npc_temp_dict(num):
     npc_dict_temp = {"npcs": []}
     for i in range(num):
@@ -108,3 +127,15 @@ def create_random_npc_temp_dict(num):
         }
         npc_dict_temp["npcs"].append(npc_details)
     return npc_dict_temp
+
+def random_npc_disection(num):
+    count = 0
+    for i in range(0, num):
+        i = RandomNPC()
+        count += 1
+        print("====================================================")
+        print("")
+        print(f"NPC NUMBER #{count}")
+        print(i.describe_npc())
+        print("")
+        print("====================================================")

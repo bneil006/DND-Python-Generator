@@ -24,23 +24,14 @@
     </aside>
     
     <main>
-        <div class="center-general">
-            <div class="controls">
-                <h2>NPC GENERATOR</h2>
-                <input type="number" id="npc-number" placeholder="Number of NPCs" min="1" max="20">
-                <button id="generate-npcs">Generate NPCs</button>
-                <button id="toggle-filters">Toggle Filters</button>
-            </div>
-            <div class="npc-filters" id="npc-filters">
-                <!-- Filters here -->
-            </div>
-            <div id="npc-container">
-                <!-- NPC Cards will be dynamically inserted here -->
-            </div>
-        </div>        
+        <div id="3d-container" style="width: 1000px; height: 600px;"></div>
+        <button id="generate-dungeon">Generate Dungeon</button>
     </main>
 </div>
-
-<script src="static/js/index.js"></script>
+<!-- Updated CDN links for Three.js and GLTFLoader.js -->
+<script src="https://cdn.jsdelivr.net/npm/three/build/three.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three/examples/js/loaders/GLTFLoader.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/three/examples/js/controls/OrbitControls.js"></script>
+<script src="static/js/generate_dungeon.js"></script>
 </body>
 </html>
