@@ -22,7 +22,7 @@ header {
     color: #EAEAEA;
     padding: 20px;
     text-align: center;
-    border-bottom: 1px solid #c5b100;
+    border-bottom: 1px solid #c49618e3;
 }
 
 aside {
@@ -30,7 +30,7 @@ aside {
     background: #414141;
     color: #EAEAEA;
     padding: 20px;
-    border-right: 1px solid #c5b100;
+    border-right: 1px solid #c49618e3;
 }
 
 main {
@@ -57,8 +57,36 @@ main {
 }
 
 /* CSS FOR GENERAL CONSTRUCTION OF SITE LAYOUT */
+
+/* CSS FOR SIDE BAR CONTENT */
+
+.sidebar-general {
+    font-family: "Nanum Gothic Coding";
+}
+
 /* CSS FOR CENTER CONTENT */
 
-.npc-header, .npc-name {
+.center-general {
+    font-family: "Nanum Gothic Coding";
+    text-align: center;
     color: #000000;
+}
+
+.npc-filters {
+    font-size: 14px;
+    border-style:double;
+    border-width: 3px;
+    border-color: #000000;
+    border-radius: 10px;
+    padding: 5px;
+}
+
+.npc-card {
+    font-size: 18px;
+    background-color: #c49618e3; /* Dark background for the card */
+    border-radius: 3px; /* Optional: rounds the corners of the card */
+    padding: 10px; /* Adds space inside the card */
+    margin: 10px auto; /* Centers the card and adds space around it */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Optional: adds a subtle shadow for depth */
+    max-width: 600px; /* Restricts card width for better readability */
 }

@@ -5,25 +5,71 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Detailed NPC</title>
     <link rel="stylesheet" href="static/css/main_structure.css">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic+Coding&display=swap" rel="stylesheet">
 </head>
 <body>
 
     <div class="container">
+        <!-- BANNER BAR / HEADER -->
         <header>
-            <h2>
-                5e NPC GENERATOR
-            </h2>
+            <h2>D&D 5e GENERATOR</h2>
         </header>
-        <aside>SIDEBAR</aside>
-        <main>
-            <div class="npc-header">
-                <h2 id="npc-name">NPC NAME</h2>
-            </div>
 
-            <div class="npc-lower">
-                <h2 id="npc-name">NPC SECOND NAME</h2>
+        <!-- SIDEBAR -->
+        <aside>
+            <div class="sidebar-general">
+                <h3 class="side-bar-title">5e GENERATORS</h3>
+            </div>
+        </aside>
+        
+        <!-- MAIN CONTENT -->
+        <main>
+            <div class="center-general">
+                <h2>NPC GENERATOR</h2>
+                <div class="npc-filters">
+                    <label for="npc-race">Race:</label>
+                    <select id="npc-race" name="npc-race">
+                        <option value="random">Random</option>
+                        <option value="dragonborn">Dragonborn</option>
+                        <option value="dwarf">Dwarf</option>
+                        <option value="elf">Elf</option>
+                        <option value="dragonborn">Dragonborn</option>
+                        <option value="dwarf">Dwarf</option>
+                        <option value="high-elf">High Elf</option>
+                        <option value="wood-elf">Wood Elf</option>
+                        <option value="dark-elf">Dark Elf</option>
+                        <option value="gnome">Gnome</option>
+                        <option value="half-elf">Half Elf</option>
+                        <option value="half-orc">Half Orc</option>
+                        <option value="halfling">Halfling</option>
+                        <option value="half-orc">Half Orc</option>
+                        <option value="human">Human</option>
+                        <option value="tiefling">Tiefling</option>
+                    </select>
+
+                    <label for="npc-class">Class:</label>
+                    <select id="npc-class" name="npc-class">
+                        <option value="random">Random</option>
+                        <option value="barbarian">Barbarian</option>
+                        <option value="bard">Bard</option>
+                        <option value="cleric">Cleric</option>
+                        <option value="druid">Druid</option>
+                        <option value="fighter">Fighter</option>
+                        <option value="monk">Monk</option>
+                        <option value="paladin">Paladin</option>
+                        <option value="ranger">Ranger</option>
+                        <option value="rogue">Rogue</option>
+                        <option value="sorcerer">Sorcerer</option>
+                        <option value="warlock">Warlock</option>
+                        <option value="wizard">Wizard</option>
+                    </select>  
+                </div>
+                <div class="npc-header">
+                    <h2 class="npc-card">NPC CARD</h2>
+                </div>
             </div>
         </main>
+
     </div>
 
     <script src="static/js/detailed_npc.js"></script>
