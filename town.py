@@ -13,7 +13,7 @@ class Area():
     def generate_npcs(self):
         self.npcs = create_town_dump(self.population)
 
-    def generate_buildings(self):
+    def generate_job_board(self):
         noble_npcs = round(0.03 * self.population)
         guard_npcs = round(0.12 * self.population)
         unemployed_npcs = round(0.06 * self.population)
@@ -45,12 +45,16 @@ class Area():
 
 
     def set_npc_jobs(self):
+        job_counts = self.generate_job_board()
         updated_npcs = []
         for npc in self.npcs["npcs"]:
-            npc_addition = {
-                "job": "Blacksmith"
-            }
-            updated_npcs.append({**npc, **npc_addition})
+            for job in job_counts:
+                if job_counts[job] > 0:
+                    npc_addition = {
+                        "job": job
+                    }
+                    job_counts[job] -= 1
+                    updated_npcs.append({**npc, **npc_addition})
         self.npcs["npcs"] = updated_npcs
 
 
@@ -68,4 +72,4 @@ class SmallTown(Area):
     def set_population(self):
         self.population = random.randint(2000, 2125)
 
-print(SmallTown().generate_buildings())
+print(SmallTown().npcs)
