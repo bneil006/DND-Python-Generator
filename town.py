@@ -47,23 +47,26 @@ class Area():
     def set_npc_jobs(self):
         job_counts = self.generate_job_board()
         updated_npcs = []
-        for npc in self.npcs["npcs"]:
-            for job in job_counts:
-                if job_counts[job] > 0:
-                    npc_addition = {
-                        "job": job
-                    }
-                    job_counts[job] -= 1
-                    updated_npcs.append({**npc, **npc_addition})
-        self.npcs["npcs"] = updated_npcs
 
+        for npc in self.npcs["npcs"]:
+            if npc.get("job"):
+                updated_npcs.append(npc)
+            else:
+                for job in job_counts:
+                    if job_counts[job] > 0:
+                        npc["job"] = job
+                        job_counts[job] -= 1
+                        updated_npcs.append(npc)
+                        break
+
+        self.npcs["npcs"] = updated_npcs
 
 class Hamlet(Area):
     def __init__(self):
         super().__init__()
 
     def set_population(self):
-        self.population = random.randint(80, 120)
+        self.population = random.randint(20, 25)
 
 class SmallTown(Area):
     def __init__(self):
@@ -72,4 +75,5 @@ class SmallTown(Area):
     def set_population(self):
         self.population = random.randint(2000, 2125)
 
-print(SmallTown().npcs)
+print(Hamlet().npcs)
+print(Hamlet().generate_job_board())
