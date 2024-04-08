@@ -14,18 +14,35 @@ class Area():
         self.npcs = create_town_dump(self.population)
 
     def generate_buildings(self):
-        # 1% should be noble
-        # 5% of the population should be guards
-        # 7% should be unemployeed
-        # 8% should be retired
-        # 9% should be business owners
-        # 10% should be adventurers
-        # 10% should be mercenaries
-        # 50% should be workers
+        noble_npcs = round(0.03 * self.population)
+        guard_npcs = round(0.12 * self.population)
+        unemployed_npcs = round(0.06 * self.population)
+        retired_npcs = round(0.08 * self.population)
+        business_owner_npcs = round(0.09 * self.population)
+        adventurer_npcs = round(0.06 * self.population)
+        mercenary_npcs = round(0.06 * self.population)
+        worker_npcs = round(0.50 * self.population)
+        
+        # Check if the total matches the population
+        total_npcs = (noble_npcs + guard_npcs + unemployed_npcs + retired_npcs +
+                    business_owner_npcs + adventurer_npcs + mercenary_npcs + worker_npcs)
+        
+        # adjust to meet total population exactly
+        discrepancy = self.population - total_npcs
+        worker_npcs += discrepancy
 
-        noble_npcs, guard_npcs, unemployeed_npcs, retired_npcs = 0, 0, 0, 0
-        business_owner_npcs, adventurer_npcs, mercenary_npcs, worker_npcs = 0, 0, 0, 0
-        pass
+        job_counts = {
+            "noble": noble_npcs,
+            "guard": guard_npcs,
+            "unemployed": unemployed_npcs,
+            "retired": retired_npcs,
+            "business_owner": business_owner_npcs,
+            "adventurer": adventurer_npcs,
+            "mercenary": mercenary_npcs,
+            "worker": worker_npcs
+        }
+        return job_counts
+
 
     def set_npc_jobs(self):
         updated_npcs = []
@@ -37,13 +54,18 @@ class Area():
         self.npcs["npcs"] = updated_npcs
 
 
-            
-
 class Hamlet(Area):
     def __init__(self):
         super().__init__()
 
     def set_population(self):
-        self.population = random.randint(1, 3)
+        self.population = random.randint(80, 120)
 
-print(Hamlet().npcs)
+class SmallTown(Area):
+    def __init__(self):
+        super().__init__()
+    
+    def set_population(self):
+        self.population = random.randint(2000, 2125)
+
+print(SmallTown().generate_buildings())
