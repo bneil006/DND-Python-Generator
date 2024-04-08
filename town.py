@@ -12,9 +12,19 @@ class Area():
     def generate_npcs(self):
         self.npcs = create_town_dump(self.population)
 
-    def get_town_information(self):
+    def get_demographic_information(self):
+        job_list = ["Retired", "Unemployeed", "Labourer", "Merchant", "Bartender", "Cook", "Blacksmith"]
+        demographic_info = {"npcs": []}
+
         for npc in self.npcs["npcs"]:
-            print(npc["name"])
+            demo_details = {
+                "name": npc["name"],
+                "race": npc["race"],
+                "subrace": npc["subrace"],
+                "job": random.choice(list(job_list))
+            }
+            demographic_info["npcs"].append(demo_details)
+        print(demographic_info)
 
 class Hamlet(Area):
     def __init__(self):
@@ -32,4 +42,4 @@ class SmallTown(Area):
 
 
 x = Hamlet()
-x.get_town_information()
+x.get_demographic_information()
