@@ -122,6 +122,25 @@ Base Stats: {self.base_stats}""")
         other_item = random.choice(list(equipment_selection["other"]))
         return weapon, secondary_weapon, armor, trinket, other_item
 
+
+def create_town_dump(num):
+    npc_dict_temp = {"npcs": []}
+    for i in range(num):
+        npc = RandomNPC()
+        npc_details = {
+            "id": npc.id,
+            "name": npc.npc_name,
+            "race": npc.npc_race["name"],
+            "subrace": npc.npc_subrace["name"],
+            "class": npc.npc_class["name"],
+            "hp": npc.npc_hp,
+            "level": npc.npc_level,
+            "stat_block": npc.base_stats,
+            "main_weapon": npc.npc_main_weapon,
+        }
+        npc_dict_temp["npcs"].append(npc_details)
+    return npc_dict_temp
+
 def create_random_npc_temp_dict(num):
     npc_dict_temp = {"npcs": []}
     for i in range(num):
@@ -141,9 +160,9 @@ def create_random_npc_temp_dict(num):
             "secondary_weapon": npc.npc_secondary_weapon,
             "armor": npc.npc_armor,
             "trinket": npc.npc_trinket,
-            "other_item": npc.npc_other_item
+            "other_item": npc.npc_other_item,
         }
         npc_dict_temp["npcs"].append(npc_details)
     return npc_dict_temp
 
-print(create_random_npc_temp_dict(1))
+# print(create_random_npc_temp_dict(1))
