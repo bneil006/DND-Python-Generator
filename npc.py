@@ -55,14 +55,46 @@ Main Stat: {self.npc_class["main_stat"]}, Saving Throws: {self.npc_class_profici
 Base Stats: {self.base_stats}""")
         
     def set_base_stats(self):
+        total_points_remaining = 27
+        stat_cost = {8: 0, 9: 1, 10: 2, 11: 3, 12: 4, 13: 5, 14: 7, 15: 9, 16: 11, 17: 13, 18: 15, 19: 17, 20: 19}
         base_stats = {"STR": 8, "DEX": 8, "CON": 8, "INT": 8, "WIS": 8, "CHA": 8}
-        for stat in base_stats:
-                if stat in self.npc_class_proficiencies["saving_throws"]:
-                    base_stats[stat] += 4
+        
+        # bard and paladin have different main stats than their saving throws so adding in +2 initially to their specific classes base_stats
+        if self.npc_class["index"] == "bard" or self.npc_class["index"] == "paladin":
+            base_stats[self.npc_class["main_stat"]] += 2
 
+        # adding +2 to base_stats based on the classes saving_throws
+        for stat in base_stats:
+            if stat in self.npc_class_proficiencies["saving_throws"]:
+                base_stats[stat] += 2
+
+        # subtracting points spent from the total point buy of 27 points based on dnd 5e rules
+        for stat, points in base_stats.items():
+            total_points_remaining -= stat_cost[points]
+        
+        # spending all the rest of the stat points remaining randomly
+        print(f"STARTING POINT BUY WITH {total_points_remaining}, BASE STATS: {base_stats}")
+        while total_points_remaining > 0:
+            choice = random.choice(list(base_stats))
+            if base_stats[choice] >= 15:
+                continue
+            else:
+                if base_stats[choice] >= 13 and total_points_remaining >= 2:
+                    base_stats[choice] += 1
+                    total_points_remaining -= 2
+                    print(f"Choice: {choice}:{base_stats[choice]-1}, Cost: 2, Total Remaining: {total_points_remaining}")
+                elif base_stats[choice] <= 12 and total_points_remaining >= 1:
+                    base_stats[choice] += 1
+                    total_points_remaining -= 1
+                    print(f"Choice: {choice}:{base_stats[choice]-1}, Cost: 1, Total Remaining: {total_points_remaining}")
+
+        # adding in +2 points to the main stat for the level advancement at level 4 to each class and after the initial point buy
         if self.npc_level > 3:
             base_stats[self.npc_class["main_stat"]] += 2
 
+        # adding in racial and subracial bonuses now after initial point buy and advancements
+        
+        print(f"ENDING POINT BUY WITH {total_points_remaining}, BASE STATS: {base_stats}")
         return base_stats
     
     def set_health_points(self):
@@ -85,24 +117,6 @@ Base Stats: {self.base_stats}""")
         trinket = random.choice(list(equipment_selection["trinket"]))
         other_item = random.choice(list(equipment_selection["other"]))
         return weapon, secondary_weapon, armor, trinket, other_item
-
-    def set_npc_specifics(self):
-        specific_choices = specifics.NPC_SPECIFICS["npc_traits"]
-        personality = random.choice(list(specific_choices["personalities_good"])) + " but " + random.choice(list(specific_choices["personalities_bad"]))
-        background = random.choice(list(specific_choices["backgrounds"]))
-        motivation = random.choice(list(specific_choices["motivations_what"])) + " " + random.choice(list(specific_choices["motivations_why"]))
-        hair_style = random.choice(list(specific_choices["hair_length"])) + " " + random.choice(list(specific_choices["hair_color"]))
-        other = random.choice(list(specific_choices["other"]))
-        return personality, background, motivation, hair_style, other
-    
-    def describe_npc(self):
-        personality, background, motivation, hair_style, other = self.set_npc_specifics()
-        description = f"""Your NPC is {personality}.
-They are a {background}.
-Their motivation is to {motivation}.
-Their hair is {hair_style}.
-Other features about them are: {other}"""
-        return description
 
 def create_random_npc_temp_dict(num):
     npc_dict_temp = {"npcs": []}
@@ -128,14 +142,4 @@ def create_random_npc_temp_dict(num):
         npc_dict_temp["npcs"].append(npc_details)
     return npc_dict_temp
 
-def random_npc_disection(num):
-    count = 0
-    for i in range(0, num):
-        i = RandomNPC()
-        count += 1
-        print("====================================================")
-        print("")
-        print(f"NPC NUMBER #{count}")
-        print(i.describe_npc())
-        print("")
-        print("====================================================")
+print(create_random_npc_temp_dict(1))
