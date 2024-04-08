@@ -73,7 +73,6 @@ Base Stats: {self.base_stats}""")
             total_points_remaining -= stat_cost[points]
         
         # spending all the rest of the stat points remaining randomly
-        print(f"STARTING POINT BUY WITH {total_points_remaining}, BASE STATS: {base_stats}")
         while total_points_remaining > 0:
             choice = random.choice(list(base_stats))
             if base_stats[choice] >= 15:
@@ -82,19 +81,24 @@ Base Stats: {self.base_stats}""")
                 if base_stats[choice] >= 13 and total_points_remaining >= 2:
                     base_stats[choice] += 1
                     total_points_remaining -= 2
-                    print(f"Choice: {choice}:{base_stats[choice]-1}, Cost: 2, Total Remaining: {total_points_remaining}")
                 elif base_stats[choice] <= 12 and total_points_remaining >= 1:
                     base_stats[choice] += 1
                     total_points_remaining -= 1
-                    print(f"Choice: {choice}:{base_stats[choice]-1}, Cost: 1, Total Remaining: {total_points_remaining}")
 
         # adding in +2 points to the main stat for the level advancement at level 4 to each class and after the initial point buy
         if self.npc_level > 3:
             base_stats[self.npc_class["main_stat"]] += 2
 
         # adding in racial and subracial bonuses now after initial point buy and advancements
-        
-        print(f"ENDING POINT BUY WITH {total_points_remaining}, BASE STATS: {base_stats}")
+        for stat, points in base_stats.items():
+            if stat in self.npc_race["ability_score_increases"]:
+                base_stats[stat] += self.npc_race["ability_score_increases"][stat]
+
+            # only runs if subrace is present and not None or []
+            if self.npc_race["subraces"]:
+                if stat in self.npc_subrace["ability_score_increases"]:
+                    base_stats[stat] += self.npc_subrace["ability_score_increases"][stat]
+
         return base_stats
     
     def set_health_points(self):
