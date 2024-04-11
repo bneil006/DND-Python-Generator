@@ -5,6 +5,7 @@ class Area():
     def __init__(self):
         self.set_population()
         self.generate_npcs()
+        self.generate_buildings()
         self.set_npc_jobs()
 
     def set_population(self):
@@ -42,7 +43,24 @@ class Area():
             "worker": worker_npcs
         }
         return job_counts
+    
+    def generate_buildings(self):
+        guard_building = 0
+        tavern_building = 0
+        bakery_building = 0
+        small_house_building = 0
+        medium_house_building = 0
+        large_house_building = 0
 
+        building_counts = {
+            "guard_building": 0,
+            "tavern_building": 0,
+            "bakery_building": 0,
+            "small_house_building": 0,
+            "medium_house_building": 0,
+            "large_house_building": 0,
+        }
+        pass
 
     def set_npc_jobs(self):
         job_counts = self.generate_job_board()
@@ -66,7 +84,47 @@ class Hamlet(Area):
         super().__init__()
 
     def set_population(self):
-        self.population = random.randint(20, 25)
+        self.population = random.randint(100, 125)
+
+    def generate_buildings(self):
+        building_counts = {
+            "guard_building": {
+                "building_count": 1,
+                "max_occupants": random.randint(3, 6),
+                "has_owner": False,
+                "needs_owner": False
+            },
+            "tavern_building": {
+                "building_count": 2,
+                "max_occupants": random.randint(8, 15),
+                "has_owner": False,
+                "needs_owner": True
+            },
+            "bakery_building": {
+                "building_count": 1,
+                "max_occupants": random.randint(8, 15),
+                "has_owner": False,
+                "needs_owner": True
+            },
+            "small_house_building": {
+                "building_count": 1,
+                "max_occupants": random.randint(3, 4),
+                "has_owner": False,
+                "needs_owner": True
+            },
+            "medium_house_building": {
+                "building_count": 1,
+                "max_occupants": random.randint(5, 8),
+                "has_owner": False,
+                "needs_owner": True
+            },
+            "large_house_building": {
+                "building_count": 1,
+                "max_occupants": random.randint(12, 15),
+                "has_owner": False,
+                "needs_owner": True
+            },
+        }
 
 class SmallTown(Area):
     def __init__(self):
@@ -75,5 +133,18 @@ class SmallTown(Area):
     def set_population(self):
         self.population = random.randint(2000, 2125)
 
-print(Hamlet().npcs)
-print(Hamlet().generate_job_board())
+class Building():
+    def __init__(self):
+        self.name_list = ["The Wickied Wyvern", "The Ragod Doll", "The Elven Quimper", "The Mystic Rose", "The Golden Goblet Tavern",
+                          "The Sapphire Lagoon", "The Bleak Bastion", "The Silent Sentienl", "The Howling Hyena", "The Parched Pirate",
+                          "The Echoing Cavern", "The Shrouded Abbey", "The Wandering Wizard"]
+    
+    def generate_name(self):
+        self.building_name = random.choice(list(self.name_list))
+        self.name_list.remove(self.building_name)
+
+class Tavern(Building):
+    def __init__(self) -> None:
+        super().__init__()
+
+print(SmallTown().generate_job_board())
