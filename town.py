@@ -1,4 +1,5 @@
 from npc import *
+import important_classes.generators as gen
 import random
 
 class Area():
@@ -45,21 +46,6 @@ class Area():
         return job_counts
     
     def generate_buildings(self):
-        guard_building = 0
-        tavern_building = 0
-        bakery_building = 0
-        small_house_building = 0
-        medium_house_building = 0
-        large_house_building = 0
-
-        building_counts = {
-            "guard_building": 0,
-            "tavern_building": 0,
-            "bakery_building": 0,
-            "small_house_building": 0,
-            "medium_house_building": 0,
-            "large_house_building": 0,
-        }
         pass
 
     def set_npc_jobs(self):
@@ -86,46 +72,6 @@ class Hamlet(Area):
     def set_population(self):
         self.population = random.randint(100, 125)
 
-    def generate_buildings(self):
-        building_counts = {
-            "guard_building": {
-                "building_count": 1,
-                "max_occupants": random.randint(3, 6),
-                "has_owner": False,
-                "needs_owner": False
-            },
-            "tavern_building": {
-                "building_count": 2,
-                "max_occupants": random.randint(8, 15),
-                "has_owner": False,
-                "needs_owner": True
-            },
-            "bakery_building": {
-                "building_count": 1,
-                "max_occupants": random.randint(8, 15),
-                "has_owner": False,
-                "needs_owner": True
-            },
-            "small_house_building": {
-                "building_count": 1,
-                "max_occupants": random.randint(3, 4),
-                "has_owner": False,
-                "needs_owner": True
-            },
-            "medium_house_building": {
-                "building_count": 1,
-                "max_occupants": random.randint(5, 8),
-                "has_owner": False,
-                "needs_owner": True
-            },
-            "large_house_building": {
-                "building_count": 1,
-                "max_occupants": random.randint(12, 15),
-                "has_owner": False,
-                "needs_owner": True
-            },
-        }
-
 class SmallTown(Area):
     def __init__(self):
         super().__init__()
@@ -133,18 +79,21 @@ class SmallTown(Area):
     def set_population(self):
         self.population = random.randint(2000, 2125)
 
+
+
 class Building():
     def __init__(self):
-        self.name_list = ["The Wickied Wyvern", "The Ragod Doll", "The Elven Quimper", "The Mystic Rose", "The Golden Goblet Tavern",
-                          "The Sapphire Lagoon", "The Bleak Bastion", "The Silent Sentienl", "The Howling Hyena", "The Parched Pirate",
-                          "The Echoing Cavern", "The Shrouded Abbey", "The Wandering Wizard"]
+        self.generate_name()
     
     def generate_name(self):
-        self.building_name = random.choice(list(self.name_list))
-        self.name_list.remove(self.building_name)
+        self.building_name = gen.generate_building_name(gen.TAVERN_NAME_ELEMENTS)
 
 class Tavern(Building):
     def __init__(self) -> None:
         super().__init__()
 
 print(SmallTown().generate_job_board())
+
+for item in range(100):
+    tavern = Tavern()
+    print(tavern.building_name)
