@@ -110,8 +110,6 @@ main {
     box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
 
-/* Other styles remain unchanged */
-
 @media (max-width: 767px) {
     .container {
         grid-template-columns: 1fr; /* Full width on mobile */
@@ -121,8 +119,8 @@ main {
             "sidebar";
     }
     
-    aside, .controls, #npc-number, #generate-npcs, #toggle-filters {
-        display: none; /* Hide sidebar and controls in the initial mobile layout adjustment */
+    aside, #npc-number, #generate-npcs, #toggle-filters {
+        display: block; /* Make sure controls are visible */
     }
 
     .controls {
@@ -137,12 +135,9 @@ main {
         margin: 8px 0; /* Add some vertical spacing */
     }
 
-    #npc-number, #generate-npcs, #toggle-filters {
-        display: block; /* Ensure these elements are displayed */
-    }
-    
     #npc-container .npc-card {
         width: calc(100% - 40px); /* Adjust card width on smaller screens */
         margin: 10px auto; /* Center cards with automatic horizontal margins */
     }
 }
+

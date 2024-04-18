@@ -58,27 +58,24 @@ TAVERN_NAME_ELEMENTS = {
         "Lonely", "Jolly", "Brave", "Haunted", "Wise", "Great", "Green", "Blue", "Golden",
         "Silver", "Ivory", "Black", "White", "Grey", "Red", "Mystic"
     ],
+    "suffixes": [
+        "Tavern", "Inn", "Pub", "House", "Alehouse", "Lodge", "Saloon", "Bar", "Retreat",
+        "Den", "Parlour", "Room", "Hall", "Keep", "Palace", "Club",
+        "Dive", "Joint", "Hangout", "Haunt", "Spot", "Refuge", "Sanctum", "Nook",
+        "Watering Hole", "Shelter", "Hovel", "Rest", "Cabaret",
+    ],
     "formats": [
         "{prefix} {first} {second}",
-        "{first} {second} Tavern",
-        "{first} {second} Inn",
-        "{first} {second} Pub",
-        "{first} {second} House",
-        "{first} {second} Alehouse",
-        "{first} {second} Lodge",
-        "{first} {second} Saloon",
-        "{first} {second} Bar",
-        "{first} {second} Refuge",
-        "{first} {second} Retreat",
-        "{first} {second} Den"
+        "{first} {second} {suffixes}",
     ]
 }
 
 def generate_building_name(elements):
     format_choice = random.choice(elements["formats"])
     name = format_choice.format(
-        prefix=random.choice(elements["prefixes"]),
-        first=random.choice(elements["first"]),
-        second=random.choice(elements["second"])
+        prefix = random.choice(elements["prefixes"]),
+        first = random.choice(elements["first"]),
+        second = random.choice(elements["second"]),
+        suffixes = random.choice(elements["suffixes"])
     )
     return name

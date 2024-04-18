@@ -45,7 +45,7 @@ class Area():
         }
         return job_counts
     
-    def generate_buildings(self):
+    def generate_buildings(self, objClass):
         pass
 
     def set_npc_jobs(self):
@@ -59,6 +59,10 @@ class Area():
                 for job in job_counts:
                     if job_counts[job] > 0:
                         npc["job"] = job
+                        npc["owner"] = None
+                        npc["home"] = None
+                        npc["current_place"] = None
+                        npc["relationships"] = []
                         job_counts[job] -= 1
                         updated_npcs.append(npc)
                         break
@@ -88,12 +92,16 @@ class Building():
     def generate_name(self):
         self.building_name = gen.generate_building_name(gen.TAVERN_NAME_ELEMENTS)
 
+    def generate_owner(self):
+        pass
+
 class Tavern(Building):
-    def __init__(self) -> None:
+    def __init__(self):
         super().__init__()
 
-print(SmallTown().generate_job_board())
+x = Hamlet()
+print(x.npcs)
 
-for item in range(100):
+for item in range(10):
     tavern = Tavern()
     print(tavern.building_name)
